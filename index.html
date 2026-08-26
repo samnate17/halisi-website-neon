@@ -10,6 +10,15 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
+<script>
+(function () {
+  try {
+    var saved = localStorage.getItem('halisi-theme');
+    var theme = saved || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+    document.documentElement.setAttribute('data-theme', theme);
+  } catch (e) {}
+})();
+</script>
 </head>
 <body>
 
@@ -26,6 +35,7 @@
       <li><a href="#mixes">Mixes</a></li>
       <li><a href="#events">Events</a></li>
       <li><a href="#merch">Merch</a></li>
+      <li><button class="theme-toggle" id="themeToggle" aria-label="Toggle color theme">Light</button></li>
       <li><a href="#booking" class="nav-cta">Booking</a></li>
     </ul>
   </nav>
@@ -58,13 +68,12 @@
     <a href="#bio" class="scroll-cue" aria-label="Scroll down">↓</a>
   </section>
 
-  <section class="bio" id="bio">
+  <section class="bio reveal" id="bio">
     <div class="container bio-grid">
       <div class="bio-photo">
         <div class="photo-frame">
           <div class="photo-placeholder">
-            <svg viewBox="0 0 24 24" width="64" height="64"><path fill="currentColor" d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10zm0 2c-4.4 0-8 2.2-8 5v3h16v-3c0-2.8-3.6-5-8-5z"/></svg>
-            <span>Add your press photo here</span>
+            <img src="https://picsum.photos/seed/halisi-press-neon/600/750" alt="Halisi press photo" loading="lazy">
           </div>
         </div>
       </div>
@@ -80,7 +89,7 @@
     </div>
   </section>
 
-  <section class="mixes" id="mixes">
+  <section class="mixes reveal" id="mixes">
     <div class="container">
       <p class="section-label">Listen</p>
       <h2 class="section-title">Latest Mixes</h2>
@@ -140,7 +149,7 @@
     </div>
   </section>
 
-  <section class="events" id="events">
+  <section class="events reveal" id="events">
     <div class="container">
       <p class="section-label">Live</p>
       <h2 class="section-title">Upcoming Shows</h2>
@@ -182,7 +191,7 @@
     </div>
   </section>
 
-  <section class="merch" id="merch">
+  <section class="merch reveal" id="merch">
     <div class="container">
       <p class="section-label">Shop</p>
       <h2 class="section-title">Merch</h2>
@@ -190,25 +199,25 @@
 
       <div class="merch-grid">
         <article class="merch-card">
-          <div class="merch-photo"><span>Product photo</span></div>
+          <div class="merch-photo"><img src="https://picsum.photos/seed/halisi-tee-neon/500/500" alt="Halisi Logo Tee" loading="lazy"></div>
           <h3>Halisi Logo Tee</h3>
           <p class="merch-price">$35</p>
           <a href="#" class="btn btn-small">Buy</a>
         </article>
         <article class="merch-card">
-          <div class="merch-photo"><span>Product photo</span></div>
+          <div class="merch-photo"><img src="https://picsum.photos/seed/halisi-hoodie-neon/500/500" alt="Afrohouse Hoodie" loading="lazy"></div>
           <h3>Afrohouse Hoodie</h3>
           <p class="merch-price">$60</p>
           <a href="#" class="btn btn-small">Buy</a>
         </article>
         <article class="merch-card">
-          <div class="merch-photo"><span>Product photo</span></div>
+          <div class="merch-photo"><img src="https://picsum.photos/seed/halisi-cap-neon/500/500" alt="Halisi Snapback" loading="lazy"></div>
           <h3>Halisi Snapback</h3>
           <p class="merch-price">$28</p>
           <a href="#" class="btn btn-small">Buy</a>
         </article>
         <article class="merch-card">
-          <div class="merch-photo"><span>Product photo</span></div>
+          <div class="merch-photo"><img src="https://picsum.photos/seed/halisi-stickers-neon/500/500" alt="Sticker Pack" loading="lazy"></div>
           <h3>Sticker Pack</h3>
           <p class="merch-price">$10</p>
           <a href="#" class="btn btn-small">Buy</a>
@@ -217,7 +226,7 @@
     </div>
   </section>
 
-  <section class="booking" id="booking">
+  <section class="booking reveal" id="booking">
     <div class="container booking-grid">
       <div class="booking-copy">
         <p class="section-label">Get in touch</p>

@@ -17,9 +17,7 @@ navLinks.querySelectorAll('a').forEach((link) => {
 // Header shadow on scroll
 const header = document.querySelector('.site-header');
 window.addEventListener('scroll', () => {
-  header.style.borderBottomColor = window.scrollY > 10
-    ? 'rgba(255,255,255,0.12)'
-    : 'rgba(255,255,255,0.06)';
+  header.classList.toggle('scrolled', window.scrollY > 10);
 });
 
 // Mix "play" demo state (visual only — wire up real audio/embeds later)
@@ -49,3 +47,40 @@ bookingForm.addEventListener('submit', (e) => {
 
 // Footer year
 document.getElementById('year').textContent = new Date().getFullYear();
+
+// Dark / light theme toggle
+const THEME_KEY = 'halisi-theme';
+const themeToggle = document.getElementById('themeToggle');
+
+function currentTheme() {
+  return document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+}
+
+function updateThemeLabel() {
+  if (themeToggle) themeToggle.textContent = currentTheme() === 'dark' ? 'Light' : 'Dark';
+}
+
+updateThemeLabel();
+
+themeToggle?.addEventListener('click', () => {
+  const next = currentTheme() === 'light' ? 'dark' : 'light';
+  document.documentElement.setAttribute('data-theme', next);
+  try { localStorage.setItem(THEME_KEY, next); } catch (e) {}
+  updateThemeLabel();
+});
+
+// Scroll-reveal for sections
+const revealEls = document.querySelectorAll('.reveal');
+if ('IntersectionObserver' in window && revealEls.length) {
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in-view');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  revealEls.forEach((el) => revealObserver.observe(el));
+} else {
+  revealEls.forEach((el) => el.classList.add('in-view'));
+}
