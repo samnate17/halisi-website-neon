@@ -1,0 +1,35 @@
+{
+  "bio": {
+    "tagline": "afrobeats · amapiano · afrohouse",
+    "text": "Halisi is a Kenyan-born DJ who has spent the last three years turning private gigs, clubs, and day parties into unforgettable experiences — blending Afrobeats energy, Amapiano's log-drum groove, and the deep pulse of Afrohouse into sets read live for the room in front of them.",
+    "yearsActive": 3
+  },
+  "mixes": [
+    { "title": "Midnight in Motion", "genre": "Afrobeats", "duration": "62 min" },
+    { "title": "Rooftop Sessions Vol. 3", "genre": "Amapiano", "duration": "74 min" },
+    { "title": "Sunset Warehouse", "genre": "Afrohouse", "duration": "58 min" },
+    { "title": "Basement Tape 04", "genre": "Afro / Amapiano", "duration": "66 min" }
+  ],
+  "events": [
+    { "day": "14", "month": "Sep", "title": "Neon Warehouse — Opening Set", "venue": "The Grid Warehouse, Los Angeles", "ticketUrl": "#" },
+    { "day": "28", "month": "Sep", "title": "Rooftop Sessions", "venue": "Skyline Lounge, San Diego", "ticketUrl": "#" },
+    { "day": "11", "month": "Oct", "title": "Sunday Day Party", "venue": "Desert Grounds, Palm Springs", "ticketUrl": "#" },
+    { "day": "02", "month": "Nov", "title": "Club Aurora — Guest Set", "venue": "Aurora, Los Angeles", "ticketUrl": "#" }
+  ],
+  "merch": [
+    { "name": "Halisi Logo Tee", "price": "$35", "imageUrl": "https://images.unsplash.com/photo-1543940610-e7e6c111ea10?q=80&w=500&h=500&fit=crop&auto=format", "buyUrl": "#" },
+    { "name": "Afrohouse Hoodie", "price": "$60", "imageUrl": "https://images.unsplash.com/photo-1594623930572-300a3011d9ae?q=80&w=500&h=500&fit=crop&auto=format", "buyUrl": "#" },
+    { "name": "Halisi Snapback", "price": "$28", "imageUrl": "https://images.unsplash.com/photo-1648738673511-16dd92b30d3b?q=80&w=500&h=500&fit=crop&auto=format", "buyUrl": "#" },
+    { "name": "Sticker Pack", "price": "$10", "imageUrl": "https://images.unsplash.com/photo-1544785349-c4a5301826fd?q=80&w=500&h=500&fit=crop&auto=format", "buyUrl": "#" }
+  ],
+  "booking": {
+    "blurb": "Private gigs, clubs, and day parties. Send the details below and expect a reply within 48 hours.",
+    "email": "booking@halisi.example"
+  },
+  "socials": {
+    "instagramHandle": "@halisi",
+    "instagramUrl": "#",
+    "soundcloudUrl": "#",
+    "spotifyUrl": "#"
+  }
+}

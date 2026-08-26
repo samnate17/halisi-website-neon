@@ -28,15 +28,104 @@ window.addEventListener('scroll', () => {
 });
 
 // Mix "play" demo state (visual only — wire up real audio/embeds later)
-const mixCards = document.querySelectorAll('[data-mix]');
-mixCards.forEach((card) => {
-  const btn = card.querySelector('.play-btn');
-  btn.addEventListener('click', () => {
-    const wasPlaying = card.classList.contains('playing');
-    mixCards.forEach((c) => c.classList.remove('playing'));
-    if (!wasPlaying) card.classList.add('playing');
+function wireMixCards() {
+  const mixCards = document.querySelectorAll('[data-mix]');
+  mixCards.forEach((card) => {
+    const btn = card.querySelector('.play-btn');
+    btn.addEventListener('click', () => {
+      const wasPlaying = card.classList.contains('playing');
+      mixCards.forEach((c) => c.classList.remove('playing'));
+      if (!wasPlaying) card.classList.add('playing');
+    });
   });
-});
+}
+
+// Render site content from content.json (edited via /admin)
+function escapeHtml(str) {
+  const div = document.createElement('div');
+  div.textContent = str == null ? '' : String(str);
+  return div.innerHTML;
+}
+
+const PLAY_ICON = '<svg class="icon-play" viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M8 5v14l11-7z"/></svg><svg class="icon-pause" viewBox="0 0 24 24" width="22" height="22" hidden><path fill="currentColor" d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg><span class="eq"><i></i><i></i><i></i><i></i></span>';
+
+function renderContent(data) {
+  const heroTagline = document.getElementById('heroTagline');
+  if (heroTagline && data.bio?.tagline) heroTagline.textContent = data.bio.tagline;
+
+  const bioText = document.getElementById('bioText');
+  if (bioText && data.bio?.text) bioText.textContent = data.bio.text;
+
+  const yearsActive = document.getElementById('yearsActive');
+  if (yearsActive && data.bio?.yearsActive != null) yearsActive.textContent = data.bio.yearsActive;
+
+  const mixesGrid = document.getElementById('mixesGrid');
+  if (mixesGrid && Array.isArray(data.mixes)) {
+    mixesGrid.innerHTML = data.mixes.map((mix) => `
+      <article class="mix-card" data-mix>
+        <button class="play-btn" aria-label="Play mix">${PLAY_ICON}</button>
+        <div class="mix-info">
+          <h3>${escapeHtml(mix.title)}</h3>
+          <p class="mix-meta">${escapeHtml(mix.genre)} · ${escapeHtml(mix.duration)}</p>
+        </div>
+      </article>
+    `).join('');
+  }
+
+  const eventsList = document.getElementById('eventsList');
+  if (eventsList && Array.isArray(data.events)) {
+    eventsList.innerHTML = data.events.map((ev) => `
+      <div class="event-row">
+        <div class="event-date"><span class="day">${escapeHtml(ev.day)}</span><span class="month">${escapeHtml(ev.month)}</span></div>
+        <div class="event-details">
+          <h3>${escapeHtml(ev.title)}</h3>
+          <p>${escapeHtml(ev.venue)}</p>
+        </div>
+        <a href="${escapeHtml(ev.ticketUrl || '#')}" class="btn btn-small">Tickets</a>
+      </div>
+    `).join('');
+  }
+
+  const merchGrid = document.getElementById('merchGrid');
+  if (merchGrid && Array.isArray(data.merch)) {
+    merchGrid.innerHTML = data.merch.map((item) => `
+      <article class="merch-card">
+        <div class="merch-photo"><img src="${escapeHtml(item.imageUrl)}" alt="${escapeHtml(item.name)}" loading="lazy"></div>
+        <h3>${escapeHtml(item.name)}</h3>
+        <p class="merch-price">${escapeHtml(item.price)}</p>
+        <a href="${escapeHtml(item.buyUrl || '#')}" class="btn btn-small">Buy</a>
+      </article>
+    `).join('');
+  }
+
+  const bookingBlurb = document.getElementById('bookingBlurb');
+  if (bookingBlurb && data.booking?.blurb) bookingBlurb.textContent = data.booking.blurb;
+
+  const bookingEmail = document.getElementById('bookingEmail');
+  if (bookingEmail && data.booking?.email) {
+    bookingEmail.textContent = data.booking.email;
+    bookingEmail.href = `mailto:${data.booking.email}`;
+  }
+
+  const bookingInstagram = document.getElementById('bookingInstagram');
+  if (bookingInstagram && data.socials?.instagramHandle) {
+    bookingInstagram.textContent = data.socials.instagramHandle;
+    if (data.socials.instagramUrl) bookingInstagram.href = data.socials.instagramUrl;
+  }
+
+  if (data.socials) {
+    document.querySelectorAll('[data-social="instagram"]').forEach((a) => { if (data.socials.instagramUrl) a.href = data.socials.instagramUrl; });
+    document.querySelectorAll('[data-social="soundcloud"]').forEach((a) => { if (data.socials.soundcloudUrl) a.href = data.socials.soundcloudUrl; });
+    document.querySelectorAll('[data-social="spotify"]').forEach((a) => { if (data.socials.spotifyUrl) a.href = data.socials.spotifyUrl; });
+  }
+
+  wireMixCards();
+}
+
+fetch('content.json')
+  .then((res) => res.json())
+  .then(renderContent)
+  .catch((err) => console.error('Could not load content.json', err));
 
 // Booking form (front-end only demo — replace with real submit handler)
 const bookingForm = document.getElementById('bookingForm');
