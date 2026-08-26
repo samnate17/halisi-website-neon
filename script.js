@@ -1,3 +1,10 @@
+// Pause the hero video for users who prefer reduced motion
+const heroVideo = document.querySelector('.hero-video');
+if (heroVideo && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  heroVideo.pause();
+  heroVideo.removeAttribute('autoplay');
+}
+
 // Mobile nav toggle
 const navToggle = document.getElementById('navToggle');
 const navLinks = document.getElementById('navLinks');
