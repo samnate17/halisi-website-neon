@@ -50,6 +50,17 @@ function escapeHtml(str) {
 const PLAY_ICON = '<svg class="icon-play" viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M8 5v14l11-7z"/></svg><svg class="icon-pause" viewBox="0 0 24 24" width="22" height="22" hidden><path fill="currentColor" d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg><span class="eq"><i></i><i></i><i></i><i></i></span>';
 
 function renderContent(data) {
+  const heroVideoSource = document.getElementById('heroVideoSource');
+  const heroVideo = document.getElementById('heroVideo');
+  if (heroVideoSource && data.media?.heroVideoUrl && heroVideoSource.src !== data.media.heroVideoUrl) {
+    heroVideoSource.src = data.media.heroVideoUrl;
+    if (heroVideo) heroVideo.load();
+  }
+  if (heroVideo && data.media?.heroPosterUrl) heroVideo.poster = data.media.heroPosterUrl;
+
+  const pressPhoto = document.getElementById('pressPhoto');
+  if (pressPhoto && data.media?.pressPhotoUrl) pressPhoto.src = data.media.pressPhotoUrl;
+
   const heroTagline = document.getElementById('heroTagline');
   if (heroTagline && data.bio?.tagline) heroTagline.textContent = data.bio.tagline;
 
@@ -114,8 +125,9 @@ function renderContent(data) {
   }
 
   if (data.socials) {
+    document.querySelectorAll('[data-social="youtube"]').forEach((a) => { if (data.socials.youtubeUrl) a.href = data.socials.youtubeUrl; });
     document.querySelectorAll('[data-social="instagram"]').forEach((a) => { if (data.socials.instagramUrl) a.href = data.socials.instagramUrl; });
-    document.querySelectorAll('[data-social="soundcloud"]').forEach((a) => { if (data.socials.soundcloudUrl) a.href = data.socials.soundcloudUrl; });
+    document.querySelectorAll('[data-social="facebook"]').forEach((a) => { if (data.socials.facebookUrl) a.href = data.socials.facebookUrl; });
     document.querySelectorAll('[data-social="mixcloud"]').forEach((a) => { if (data.socials.mixcloudUrl) a.href = data.socials.mixcloudUrl; });
   }
 

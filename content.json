@@ -1,4 +1,9 @@
 {
+  "media": {
+    "heroVideoUrl": "https://assets.mixkit.co/videos/4026/4026-360.mp4",
+    "heroPosterUrl": "https://images.unsplash.com/photo-1772187727910-7d2facda0c21?q=80&w=1920&h=1200&fit=crop&auto=format",
+    "pressPhotoUrl": "https://images.unsplash.com/photo-1772187727910-7d2facda0c21?q=80&w=600&h=750&fit=crop&auto=format"
+  },
   "bio": {
     "tagline": "afrobeats · amapiano · afrohouse",
     "text": "Halisi is a Kenyan-born DJ who has spent the last three years turning private gigs, clubs, and day parties into unforgettable experiences — blending Afrobeats energy, Amapiano's log-drum groove, and the deep pulse of Afrohouse into sets read live for the room in front of them.",
@@ -30,7 +35,7 @@
     {
       "day": "6",
       "month": "Sep",
-      "title": "Maji Mazuri ",
+      "title": "Maji Mazuri",
       "venue": "Miracle of science Bar and grill, Cambridge",
       "ticketUrl": "https://partiful.com/e/2pxZHfe6rzPcYXkWQMAX?utm_source=ig&utm_medium=social&utm_content=link_in_bio&fbclid=PAdGRleAT9K91wZG9mAmZkaWQWUNTUhSCeCuzvD6pa7lsoRH6VzXP1JmV4dG4DYWVtAjExAHNydGMGYXBwX2lkDzEyNDAyNDU3NDI4NzQxNAABp-l9-jQo1V6Gk5SuLaOkt2On8bHgZ49OhNutenLkc_8rw43TU4Fhe_MglRuE_aem_4DaU9M5v4zH6MHJjY2bQJg"
     }
@@ -41,9 +46,10 @@
     "email": "halisidj@gmail.com"
   },
   "socials": {
+    "youtubeUrl": "#",
     "instagramHandle": "halisi_dj",
     "instagramUrl": "https://www.instagram.com/halisi_dj",
-    "soundcloudUrl": "https://www.mixcloud.com/HalisiDJ/",
+    "facebookUrl": "#",
     "mixcloudUrl": "https://www.mixcloud.com/HalisiDJ/"
   }
 }
