@@ -591,6 +591,88 @@ section:not(.hero) { padding: 110px 0; position: relative; z-index: 1; }
 .contact-line a { font-size: 1.05rem; font-weight: 600; }
 .contact-line a:hover { color: var(--accent-2); }
 
+/* Availability calendar */
+.availability {
+  margin-top: 32px;
+  padding-top: 28px;
+  border-top: 1px solid var(--border);
+  max-width: 340px;
+}
+.cal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+.cal-month {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-weight: 700;
+}
+.cal-nav {
+  width: 30px; height: 30px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--surface-2);
+  color: var(--text);
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: border-color 0.15s ease;
+}
+.cal-nav:hover { border-color: var(--accent-2); }
+.cal-nav:disabled { opacity: 0.3; cursor: not-allowed; }
+.cal-nav:disabled:hover { border-color: var(--border); }
+.cal-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: 8px;
+}
+.cal-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 5px;
+}
+.cal-cell {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  border-radius: 7px;
+}
+.cal-empty { visibility: hidden; }
+.cal-past { color: var(--text-dim); opacity: 0.35; }
+.cal-open {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text);
+  cursor: pointer;
+  transition: border-color 0.15s ease, transform 0.15s ease;
+}
+.cal-open:hover { border-color: var(--accent-2); transform: translateY(-1px); }
+.cal-booked {
+  background: var(--surface-2);
+  color: var(--text-dim);
+  text-decoration: line-through;
+  cursor: not-allowed;
+}
+.cal-legend {
+  display: flex;
+  gap: 20px;
+  margin-top: 16px;
+  font-size: 0.78rem;
+  color: var(--text-dim);
+}
+.cal-legend-item { display: flex; align-items: center; gap: 6px; }
+.cal-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+.cal-dot-open { background: var(--grad); }
+.cal-dot-booked { background: var(--border); }
+
 .booking-form {
   background: var(--surface);
   border: 1px solid var(--border);

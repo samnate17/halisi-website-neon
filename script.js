@@ -156,7 +156,73 @@ function renderContent(data) {
     document.querySelectorAll('[data-social="soundcloud"]').forEach((a) => { if (data.socials.soundcloudUrl) a.href = data.socials.soundcloudUrl; });
   }
 
+  unavailableDatesCache = Array.isArray(data.unavailableDates) ? data.unavailableDates : [];
+  renderCalendar();
+
   wireMixCards();
+}
+
+// Availability calendar
+let unavailableDatesCache = [];
+let calendarMonthOffset = 0;
+
+function renderCalendar() {
+  const container = document.getElementById('availabilityCalendar');
+  if (!container) return;
+
+  const unavailSet = new Set(unavailableDatesCache.map((d) => d.date));
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const viewDate = new Date(today.getFullYear(), today.getMonth() + calendarMonthOffset, 1);
+  const year = viewDate.getFullYear();
+  const month = viewDate.getMonth();
+  const monthName = viewDate.toLocaleString('en-US', { month: 'long' });
+  const firstDay = new Date(year, month, 1).getDay();
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+  let cells = '';
+  for (let i = 0; i < firstDay; i++) cells += '<div class="cal-cell cal-empty"></div>';
+  for (let d = 1; d <= daysInMonth; d++) {
+    const dateObj = new Date(year, month, d);
+    const iso = `${year}-${String(month + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
+    const isPast = dateObj < today;
+    const isUnavailable = unavailSet.has(iso);
+    let cls = 'cal-cell';
+    if (isPast) cls += ' cal-past';
+    else if (isUnavailable) cls += ' cal-booked';
+    else cls += ' cal-open';
+    cells += `<div class="${cls}" data-date="${iso}">${d}</div>`;
+  }
+
+  container.innerHTML = `
+    <div class="cal-header">
+      <button type="button" class="cal-nav" id="calPrev" aria-label="Previous month" ${calendarMonthOffset <= 0 ? 'disabled' : ''}>&larr;</button>
+      <span class="cal-month">${monthName} ${year}</span>
+      <button type="button" class="cal-nav" id="calNext" aria-label="Next month" ${calendarMonthOffset >= 11 ? 'disabled' : ''}>&rarr;</button>
+    </div>
+    <div class="cal-weekdays"><span>S</span><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span></div>
+    <div class="cal-grid">${cells}</div>
+    <div class="cal-legend">
+      <span class="cal-legend-item"><i class="cal-dot cal-dot-open"></i> Available</span>
+      <span class="cal-legend-item"><i class="cal-dot cal-dot-booked"></i> Booked</span>
+    </div>
+  `;
+
+  document.getElementById('calPrev')?.addEventListener('click', () => {
+    if (calendarMonthOffset > 0) { calendarMonthOffset--; renderCalendar(); }
+  });
+  document.getElementById('calNext')?.addEventListener('click', () => {
+    if (calendarMonthOffset < 11) { calendarMonthOffset++; renderCalendar(); }
+  });
+  container.querySelectorAll('.cal-open').forEach((cell) => {
+    cell.addEventListener('click', () => {
+      const dateInput = document.getElementById('eventDate');
+      if (dateInput) {
+        dateInput.value = cell.dataset.date;
+        dateInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    });
+  });
 }
 
 fetch('content.json')
