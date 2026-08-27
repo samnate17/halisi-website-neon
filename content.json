@@ -11,24 +11,14 @@
   },
   "mixes": [
     {
-      "title": "Midnight in Motion",
-      "genre": "Afrobeats",
-      "duration": "62 min"
-    },
-    {
-      "title": "Rooftop Sessions Vol. 3",
-      "genre": "Amapiano",
-      "duration": "74 min"
-    },
-    {
-      "title": "Sunset Warehouse",
-      "genre": "Afrohouse",
-      "duration": "58 min"
-    },
-    {
-      "title": "Basement Tape 04",
-      "genre": "Afro / Amapiano",
+      "title": "Late night mix",
+      "genre": "Afrohouse/Amapiano",
       "duration": "66 min"
+    },
+    {
+      "title": "Private School Amapiano",
+      "genre": "Amapiano",
+      "duration": "99 min"
     }
   ],
   "events": [
