@@ -1,11 +1,8 @@
 {
   "media": {
-    "logoUrl": "",
-    "heroVideoUrl": "https://samnate17.github.io/halisi-website/uploads/1787843491155-whatsapp-video-2026-08-26-at-4.25.31-pm.mp4",
-    "heroVideoPosition": "50% 50%",
+    "heroVideoUrl": "https://samnate17.github.io/halisi-website/uploads/1787846426008-dj-animation-no-words-.mp4",
     "heroPosterUrl": "https://samnate17.github.io/halisi-website/uploads/1787843745294-halisi-dj-logo.jpeg",
-    "pressPhotoUrl": "https://samnate17.github.io/halisi-website/uploads/1787843829904-taco-naco-close-up.jpeg",
-    "pressPhotoPosition": "50% 50%"
+    "pressPhotoUrl": "https://samnate17.github.io/halisi-website/uploads/1787846486699-smoot-standard-close-up.jpeg"
   },
   "bio": {
     "tagline": "afrobeats · amapiano · afrohouse",
@@ -16,14 +13,12 @@
     {
       "title": "Late night mix",
       "genre": "Afrohouse/Amapiano",
-      "duration": "66 min",
-      "listenUrl": "#"
+      "duration": "66 min"
     },
     {
       "title": "Private School Amapiano",
       "genre": "Amapiano",
-      "duration": "99 min",
-      "listenUrl": "#"
+      "duration": "99 min"
     }
   ],
   "events": [
@@ -45,7 +40,6 @@
     "instagramHandle": "halisi_dj",
     "instagramUrl": "https://www.instagram.com/halisi_dj",
     "facebookUrl": "https://www.facebook.com/share/18GrVSU91D/?mibextid=wwXIfr",
-    "mixcloudUrl": "https://www.mixcloud.com/HalisiDJ/",
-    "soundcloudUrl": "#"
+    "mixcloudUrl": "https://www.mixcloud.com/HalisiDJ/"
   }
 }
