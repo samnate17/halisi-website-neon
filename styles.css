@@ -15,6 +15,8 @@
   --header-bg: rgba(10, 10, 18, 0.65);
   --header-border: rgba(255, 255, 255, 0.06);
   --header-border-strong: rgba(255, 255, 255, 0.12);
+  --font-heading: 'Space Grotesk', sans-serif;
+  --font-body: 'Inter', system-ui, -apple-system, sans-serif;
 }
 
 :root[data-theme="light"] {
@@ -38,7 +40,7 @@ body {
   margin: 0;
   background: var(--bg);
   color: var(--text);
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-family: var(--font-body);
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   transition: background-color 0.25s ease, color 0.25s ease;
@@ -70,7 +72,7 @@ body {
 }
 
 h1, h2, h3, .logo {
-  font-family: 'Space Grotesk', 'Inter', sans-serif;
+  font-family: var(--font-heading);
   margin: 0;
 }
 
@@ -426,7 +428,7 @@ section:not(.hero) { padding: 110px 0; position: relative; z-index: 1; }
 }
 .bio-stats li { display: flex; flex-direction: column; }
 .bio-stats strong {
-  font-family: 'Space Grotesk', sans-serif;
+  font-family: var(--font-heading);
   font-size: 1.8rem;
   background: var(--grad);
   -webkit-background-clip: text;
@@ -517,7 +519,7 @@ section:not(.hero) { padding: 110px 0; position: relative; z-index: 1; }
   border-radius: 10px;
   background: var(--surface-2);
 }
-.event-date .day { font-family: 'Space Grotesk', sans-serif; font-size: 1.4rem; font-weight: 700; }
+.event-date .day { font-family: var(--font-heading); font-size: 1.4rem; font-weight: 700; }
 .event-date .month { font-size: 0.7rem; text-transform: uppercase; color: var(--accent-2); letter-spacing: 0.08em; }
 
 .event-details { flex: 1; }

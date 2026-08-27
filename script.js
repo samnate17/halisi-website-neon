@@ -50,6 +50,12 @@ function escapeHtml(str) {
 const PLAY_ICON = '<svg class="icon-play" viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M8 5v14l11-7z"/></svg><svg class="icon-pause" viewBox="0 0 24 24" width="22" height="22" hidden><path fill="currentColor" d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg><span class="eq"><i></i><i></i><i></i><i></i></span>';
 
 function renderContent(data) {
+  const root = document.documentElement.style;
+  if (data.design?.fontHeading) root.setProperty('--font-heading', `'${data.design.fontHeading}', sans-serif`);
+  if (data.design?.fontBody) root.setProperty('--font-body', `'${data.design.fontBody}', sans-serif`);
+  if (data.design?.accentColor) root.setProperty('--accent', data.design.accentColor);
+  if (data.design?.accentColor2) root.setProperty('--accent-2', data.design.accentColor2);
+
   const heroVideoSource = document.getElementById('heroVideoSource');
   const heroVideo = document.getElementById('heroVideo');
   if (heroVideoSource && data.media?.heroVideoUrl && heroVideoSource.src !== data.media.heroVideoUrl) {
