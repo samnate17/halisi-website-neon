@@ -119,7 +119,7 @@ function renderContent(data) {
   if (merchGrid && Array.isArray(data.merch)) {
     merchGrid.innerHTML = data.merch.map((item) => `
       <article class="merch-card">
-        <div class="merch-photo"><img src="${escapeHtml(item.imageUrl)}" alt="${escapeHtml(item.name)}" loading="lazy"></div>
+        <div class="merch-photo"><img src="${escapeHtml(item.imageUrl)}" alt="${escapeHtml(item.name)}" loading="lazy" style="object-position:${escapeHtml(item.imagePosition || '50% 50%')}"></div>
         <h3>${escapeHtml(item.name)}</h3>
         <p class="merch-price">${escapeHtml(item.price)}</p>
         <a href="${escapeHtml(item.buyUrl || '#')}" class="btn btn-small">Buy</a>
