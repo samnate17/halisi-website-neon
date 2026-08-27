@@ -5,7 +5,6 @@
     "accentColor": "",
     "accentColor2": ""
   },
-  "unavailableDates": [],
   "media": {
     "logoUrl": "https://samnate17.github.io/halisi-website/uploads/1787853747237-halisi-dj-logo.jpeg",
     "heroVideoUrl": "https://samnate17.github.io/halisi-website/uploads/1787846426008-dj-animation-no-words-.mp4",
@@ -43,6 +42,17 @@
     }
   ],
   "merch": [],
+  "unavailableDates": [
+    {
+      "date": "2026-09-06"
+    },
+    {
+      "date": "2026-10-01"
+    },
+    {
+      "date": "2026-09-13"
+    }
+  ],
   "booking": {
     "blurb": "Private gigs, clubs, and day parties. Send the details below and expect a reply within 48 hours.",
     "email": "halisidj@gmail.com"
