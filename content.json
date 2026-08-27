@@ -2,8 +2,10 @@
   "media": {
     "logoUrl": "",
     "heroVideoUrl": "https://samnate17.github.io/halisi-website/uploads/1787843491155-whatsapp-video-2026-08-26-at-4.25.31-pm.mp4",
+    "heroVideoPosition": "50% 50%",
     "heroPosterUrl": "https://samnate17.github.io/halisi-website/uploads/1787843745294-halisi-dj-logo.jpeg",
-    "pressPhotoUrl": "https://samnate17.github.io/halisi-website/uploads/1787843829904-taco-naco-close-up.jpeg"
+    "pressPhotoUrl": "https://samnate17.github.io/halisi-website/uploads/1787843829904-taco-naco-close-up.jpeg",
+    "pressPhotoPosition": "50% 50%"
   },
   "bio": {
     "tagline": "afrobeats · amapiano · afrohouse",

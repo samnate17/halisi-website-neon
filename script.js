@@ -57,9 +57,11 @@ function renderContent(data) {
     if (heroVideo) heroVideo.load();
   }
   if (heroVideo && data.media?.heroPosterUrl) heroVideo.poster = data.media.heroPosterUrl;
+  if (heroVideo && data.media?.heroVideoPosition) heroVideo.style.objectPosition = data.media.heroVideoPosition;
 
   const pressPhoto = document.getElementById('pressPhoto');
   if (pressPhoto && data.media?.pressPhotoUrl) pressPhoto.src = data.media.pressPhotoUrl;
+  if (pressPhoto && data.media?.pressPhotoPosition) pressPhoto.style.objectPosition = data.media.pressPhotoPosition;
 
   const logoUrl = data.media?.logoUrl;
   document.querySelectorAll('.logo').forEach((el) => {
