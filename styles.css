@@ -180,11 +180,20 @@ img { max-width: 100%; display: block; }
 }
 
 .logo {
+  display: flex;
+  align-items: center;
   font-size: 1.3rem;
   font-weight: 700;
   letter-spacing: 0.02em;
 }
-.logo span { color: var(--accent); }
+.logo-text span { color: var(--accent); }
+.logo-img {
+  height: 34px;
+  width: auto;
+  display: none;
+}
+.logo-img.visible { display: block; }
+.logo-text.hidden { display: none; }
 
 .nav-links {
   list-style: none;
@@ -247,7 +256,7 @@ img { max-width: 100%; display: block; }
   position: absolute;
   inset: 0;
   background: var(--bg);
-  opacity: 0.55;
+  opacity: 0.3;
   transition: background-color 0.25s ease;
 }
 .hero-video {
@@ -299,6 +308,7 @@ img { max-width: 100%; display: block; }
   letter-spacing: 0.1em;
   text-transform: uppercase;
   margin-bottom: 18px;
+  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.6);
 }
 
 .hero-title {
@@ -306,12 +316,14 @@ img { max-width: 100%; display: block; }
   line-height: 0.95;
   font-weight: 700;
   margin-bottom: 22px;
+  text-shadow: 0 4px 30px rgba(0, 0, 0, 0.55);
 }
 
 .hero-tagline {
   max-width: 520px;
   font-size: 1.15rem;
   margin-bottom: 34px;
+  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.6);
 }
 
 .hero-actions {
@@ -475,6 +487,8 @@ section:not(.hero) { padding: 110px 0; position: relative; z-index: 1; }
   50% { transform: scaleY(1); }
 }
 
+.mix-info { flex: 1; min-width: 0; }
+.mix-card .btn-small { flex-shrink: 0; }
 .mix-info h3 { font-size: 1.05rem; margin-bottom: 4px; }
 .mix-meta { margin: 0; font-size: 0.85rem; color: var(--text-dim); }
 
