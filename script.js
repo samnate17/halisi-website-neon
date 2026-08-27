@@ -64,7 +64,11 @@ function renderContent(data) {
       heroVideo.load();
       // Calling .load() resets the element, and browsers don't re-honor the
       // `autoplay` attribute after that — it has to be requested explicitly.
+      // Setting `.muted` as a property (not just relying on the HTML attribute)
+      // is what Chrome/Safari's own autoplay-policy docs recommend for a
+      // programmatic play() call to reliably bypass autoplay restrictions.
       if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        heroVideo.muted = true;
         heroVideo.play().catch(() => {});
       }
     }
