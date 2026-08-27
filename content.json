@@ -1,8 +1,8 @@
 {
   "media": {
-    "heroVideoUrl": "https://assets.mixkit.co/videos/4026/4026-360.mp4",
-    "heroPosterUrl": "https://images.unsplash.com/photo-1772187727910-7d2facda0c21?q=80&w=1920&h=1200&fit=crop&auto=format",
-    "pressPhotoUrl": "https://images.unsplash.com/photo-1772187727910-7d2facda0c21?q=80&w=600&h=750&fit=crop&auto=format"
+    "heroVideoUrl": "https://samnate17.github.io/halisi-website/uploads/1787843491155-whatsapp-video-2026-08-26-at-4.25.31-pm.mp4",
+    "heroPosterUrl": "https://samnate17.github.io/halisi-website/uploads/1787843745294-halisi-dj-logo.jpeg",
+    "pressPhotoUrl": "https://samnate17.github.io/halisi-website/uploads/1787843829904-taco-naco-close-up.jpeg"
   },
   "bio": {
     "tagline": "afrobeats · amapiano · afrohouse",
@@ -46,10 +46,10 @@
     "email": "halisidj@gmail.com"
   },
   "socials": {
-    "youtubeUrl": "#",
+    "youtubeUrl": "https://youtube.com/@halisidj-i2h?si=EtZptZuYHYvG6zgB",
     "instagramHandle": "halisi_dj",
     "instagramUrl": "https://www.instagram.com/halisi_dj",
-    "facebookUrl": "#",
+    "facebookUrl": "https://www.facebook.com/share/18GrVSU91D/?mibextid=wwXIfr",
     "mixcloudUrl": "https://www.mixcloud.com/HalisiDJ/"
   }
 }
