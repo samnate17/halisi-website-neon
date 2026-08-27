@@ -116,7 +116,7 @@ function renderContent(data) {
   if (data.socials) {
     document.querySelectorAll('[data-social="instagram"]').forEach((a) => { if (data.socials.instagramUrl) a.href = data.socials.instagramUrl; });
     document.querySelectorAll('[data-social="soundcloud"]').forEach((a) => { if (data.socials.soundcloudUrl) a.href = data.socials.soundcloudUrl; });
-    document.querySelectorAll('[data-social="spotify"]').forEach((a) => { if (data.socials.spotifyUrl) a.href = data.socials.spotifyUrl; });
+    document.querySelectorAll('[data-social="mixcloud"]').forEach((a) => { if (data.socials.mixcloudUrl) a.href = data.socials.mixcloudUrl; });
   }
 
   wireMixCards();
