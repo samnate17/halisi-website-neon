@@ -60,7 +60,14 @@ function renderContent(data) {
   const heroVideo = document.getElementById('heroVideo');
   if (heroVideoSource && data.media?.heroVideoUrl && heroVideoSource.src !== data.media.heroVideoUrl) {
     heroVideoSource.src = data.media.heroVideoUrl;
-    if (heroVideo) heroVideo.load();
+    if (heroVideo) {
+      heroVideo.load();
+      // Calling .load() resets the element, and browsers don't re-honor the
+      // `autoplay` attribute after that — it has to be requested explicitly.
+      if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        heroVideo.play().catch(() => {});
+      }
+    }
   }
   if (heroVideo && data.media?.heroPosterUrl) heroVideo.poster = data.media.heroPosterUrl;
   if (heroVideo && data.media?.heroVideoPosition) heroVideo.style.objectPosition = data.media.heroVideoPosition;
