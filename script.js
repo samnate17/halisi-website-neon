@@ -27,15 +27,46 @@ window.addEventListener('scroll', () => {
   header.classList.toggle('scrolled', window.scrollY > 10);
 });
 
-// Mix "play" demo state (visual only — wire up real audio/embeds later)
+// Mix "play" — plays ~20s of the mix's preview clip (if one was uploaded in
+// the admin) while the button morphs into a running equalizer. Falls back to
+// a visual-only toggle when a mix has no preview clip set.
+const PREVIEW_DURATION_MS = 20000;
+let previewAudio = null;
+let previewTimer = null;
+
+function stopPreview(mixCards) {
+  clearTimeout(previewTimer);
+  previewAudio?.pause();
+  mixCards.forEach((c) => c.classList.remove('playing'));
+}
+
 function wireMixCards() {
   const mixCards = document.querySelectorAll('[data-mix]');
+  if (!previewAudio) {
+    previewAudio = new Audio();
+    // Re-query on each fire rather than closing over `mixCards` — the mixes
+    // list gets fully re-rendered (new DOM nodes) on every content refresh,
+    // which would otherwise leave this listener acting on stale/detached cards.
+    previewAudio.addEventListener('ended', () => stopPreview(document.querySelectorAll('[data-mix]')));
+  }
   mixCards.forEach((card) => {
     const btn = card.querySelector('.play-btn');
     btn.addEventListener('click', () => {
       const wasPlaying = card.classList.contains('playing');
-      mixCards.forEach((c) => c.classList.remove('playing'));
-      if (!wasPlaying) card.classList.add('playing');
+      stopPreview(mixCards);
+      if (wasPlaying) return;
+
+      const url = card.dataset.previewUrl;
+      if (!url) {
+        // No preview clip uploaded for this mix — visual-only toggle.
+        card.classList.add('playing');
+        return;
+      }
+      card.classList.add('playing');
+      previewAudio.src = url;
+      previewAudio.currentTime = 0;
+      previewAudio.play().catch(() => stopPreview(mixCards));
+      previewTimer = setTimeout(() => stopPreview(mixCards), PREVIEW_DURATION_MS);
     });
   });
 }
@@ -197,7 +228,7 @@ function renderContent(data) {
   const mixesGrid = document.getElementById('mixesGrid');
   if (mixesGrid && Array.isArray(data.mixes)) {
     mixesGrid.innerHTML = data.mixes.map((mix) => `
-      <article class="mix-card" data-mix>
+      <article class="mix-card" data-mix${mix.previewUrl ? ` data-preview-url="${escapeHtml(mix.previewUrl)}"` : ''}>
         <button class="play-btn" aria-label="Play mix">${PLAY_ICON}</button>
         <div class="mix-info">
           <h3>${escapeHtml(mix.title)}</h3>
