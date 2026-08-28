@@ -13,7 +13,12 @@
     "heroPosterUrl": "https://samnate17.github.io/halisi-website/uploads/1787843745294-halisi-dj-logo.jpeg",
     "pressPhotoUrl": "https://samnate17.github.io/halisi-website/uploads/1787855891666-smoot-standard-full-size-pic.jpeg",
     "pressPhotoPosition": "50% 50%",
-    "pressPhotoZoom": 1
+    "pressPhotoZoom": 1,
+    "siteBackgroundUrl": "",
+    "siteBackgroundPosition": "50% 50%",
+    "siteBackgroundZoom": 1,
+    "siteBackgroundOverlay": 0.55,
+    "homepageAudioUrl": ""
   },
   "bio": {
     "tagline": "afrobeats · amapiano · afrohouse",
