@@ -251,8 +251,29 @@ bookingForm.addEventListener('submit', (e) => {
     bookingForm.reportValidity();
     return;
   }
-  formStatus.textContent = "Thanks! Your inquiry has been noted — connect a real form backend (e.g. Formspree, Netlify Forms) to receive these by email.";
-  bookingForm.reset();
+
+  const name = document.getElementById('name').value;
+  const email = document.getElementById('email').value;
+  const eventType = document.getElementById('eventType').value;
+  const eventDate = document.getElementById('eventDate').value;
+  const message = document.getElementById('message').value;
+
+  // Send via the visitor's own email app rather than a backend —
+  // targets whatever booking email is currently set in content.json.
+  const bookingEmailAddr = document.getElementById('bookingEmail').href.replace(/^mailto:/, '');
+  const subject = `Booking inquiry — ${eventType}${eventDate ? ' on ' + eventDate : ''}`;
+  const body = [
+    `Name: ${name}`,
+    `Email: ${email}`,
+    `Event type: ${eventType}`,
+    `Event date: ${eventDate || 'Not specified'}`,
+    '',
+    'Details:',
+    message
+  ].join('\n');
+  window.location.href = `mailto:${bookingEmailAddr}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+  formStatus.textContent = "Opening your email app with this inquiry pre-filled — hit send there to complete it.";
 });
 
 // Footer year
