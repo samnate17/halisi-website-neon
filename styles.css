@@ -105,18 +105,28 @@ main, .site-footer { position: relative; z-index: 1; }
 .audio-toggle.is-playing .icon-sound-off { display: none; }
 .audio-toggle.is-playing .icon-sound-on { display: block; color: var(--accent-2); }
 
+/* Light/dark mode toggle — floats bottom-left, mirroring the audio toggle
+   on the bottom-right, so it's reachable on every screen size without
+   opening the mobile nav menu. */
 .theme-toggle {
-  background: none;
-  border: none;
+  position: fixed;
+  left: 20px;
+  bottom: 20px;
+  z-index: 90;
+  height: 46px;
+  padding: 0 18px;
+  border-radius: 23px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
   cursor: pointer;
   font: inherit;
-  font-size: 0.92rem;
+  font-size: 0.85rem;
   font-weight: 500;
-  color: var(--text-dim);
-  padding: 0;
-  transition: color 0.15s ease;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
 }
-.theme-toggle:hover { color: var(--text); }
+.theme-toggle:hover { border-color: var(--accent); box-shadow: var(--shadow-glow); transform: scale(1.05); }
 
 @media (prefers-reduced-motion: no-preference) {
   .reveal {
@@ -821,7 +831,7 @@ input:focus, select:focus, textarea:focus {
   }
   .nav-links.open { max-height: 380px; }
   .nav-links li { width: 100%; }
-  .nav-links a, .nav-links .theme-toggle { display: block; padding: 16px 24px; width: 100%; text-align: left; }
+  .nav-links a { display: block; padding: 16px 24px; width: 100%; text-align: left; }
   .nav-cta { border-radius: 0; text-align: center; }
   .nav-toggle { display: flex; }
 
