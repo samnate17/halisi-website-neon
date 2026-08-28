@@ -122,12 +122,12 @@ function renderContent(data) {
   if (eventsList && Array.isArray(data.events)) {
     eventsList.innerHTML = data.events.map((ev) => `
       <div class="event-row">
-        ${ev.imageUrl ? `<img class="event-thumb" src="${escapeHtml(ev.imageUrl)}" alt="" style="object-position:${escapeHtml(ev.imagePosition || '50% 50%')}">` : ''}
         <div class="event-date"><span class="day">${escapeHtml(ev.day)}</span><span class="month">${escapeHtml(ev.month)}</span></div>
         <div class="event-details">
           <h3>${escapeHtml(ev.title)}</h3>
           <p>${escapeHtml(ev.venue)}</p>
         </div>
+        ${ev.imageUrl ? `<img class="event-thumb" src="${escapeHtml(ev.imageUrl)}" alt="" style="object-position:${escapeHtml(ev.imagePosition || '50% 50%')}">` : ''}
         <a href="${escapeHtml(ev.ticketUrl || '#')}" class="btn btn-small">Tickets</a>
       </div>
     `).join('');
