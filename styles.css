@@ -508,6 +508,13 @@ section:not(.hero) { padding: 110px 0; position: relative; z-index: 1; }
   transition: border-color 0.15s ease;
 }
 .event-row:hover { border-color: rgba(34,229,255,0.4); }
+.event-thumb {
+  width: 64px;
+  height: 64px;
+  object-fit: cover;
+  border-radius: 10px;
+  flex-shrink: 0;
+}
 
 .event-date {
   flex-shrink: 0;
@@ -656,9 +663,10 @@ section:not(.hero) { padding: 110px 0; position: relative; z-index: 1; }
 }
 .cal-open:hover { border-color: var(--accent-2); transform: translateY(-1px); }
 .cal-booked {
-  background: var(--surface-2);
-  color: var(--text-dim);
+  background: rgba(248, 113, 113, 0.12);
+  color: #f87171;
   text-decoration: line-through;
+  border: 1px solid rgba(248, 113, 113, 0.35);
   cursor: not-allowed;
 }
 .cal-legend {
@@ -671,7 +679,7 @@ section:not(.hero) { padding: 110px 0; position: relative; z-index: 1; }
 .cal-legend-item { display: flex; align-items: center; gap: 6px; }
 .cal-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
 .cal-dot-open { background: var(--grad); }
-.cal-dot-booked { background: var(--border); }
+.cal-dot-booked { background: #f87171; }
 
 .booking-form {
   background: var(--surface);
