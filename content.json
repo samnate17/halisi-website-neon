@@ -9,9 +9,11 @@
     "logoUrl": "https://samnate17.github.io/halisi-website/uploads/1787853747237-halisi-dj-logo.jpeg",
     "heroVideoUrl": "https://samnate17.github.io/halisi-website/uploads/1787846426008-dj-animation-no-words-.mp4",
     "heroVideoPosition": "49% 51%",
+    "heroVideoZoom": 1,
     "heroPosterUrl": "https://samnate17.github.io/halisi-website/uploads/1787843745294-halisi-dj-logo.jpeg",
     "pressPhotoUrl": "https://samnate17.github.io/halisi-website/uploads/1787855891666-smoot-standard-full-size-pic.jpeg",
-    "pressPhotoPosition": "50% 50%"
+    "pressPhotoPosition": "50% 50%",
+    "pressPhotoZoom": 1
   },
   "bio": {
     "tagline": "afrobeats · amapiano · afrohouse",
@@ -41,6 +43,7 @@
   "events": [
     {
       "imagePosition": "50% 50%",
+      "imageZoom": 1,
       "day": "6",
       "month": "Sep",
       "title": "Maji Mazuri",
