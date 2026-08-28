@@ -235,12 +235,7 @@ img { max-width: 100%; display: block; }
   position: fixed;
   top: 0; left: 0; right: 0;
   z-index: 100;
-  backdrop-filter: blur(14px);
-  background: var(--header-bg);
-  border-bottom: 1px solid var(--header-border);
-  transition: background-color 0.25s ease, border-color 0.25s ease;
 }
-.site-header.scrolled { border-bottom-color: var(--header-border-strong); }
 
 .nav {
   display: flex;
@@ -253,9 +248,10 @@ img { max-width: 100%; display: block; }
 .logo {
   display: flex;
   align-items: center;
-  font-size: 1.3rem;
-  font-weight: 700;
-  letter-spacing: 0.02em;
+  font-size: 0.95rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 .logo-text span { color: var(--accent); }
 .logo-img {
