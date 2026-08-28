@@ -1,9 +1,9 @@
 {
   "design": {
-    "fontHeading": "Space Grotesk",
+    "fontHeading": "Unbounded",
     "fontBody": "Inter",
-    "accentColor": "",
-    "accentColor2": ""
+    "accentColor": "#ff2e93",
+    "accentColor2": "#22e5ff"
   },
   "media": {
     "logoUrl": "https://samnate17.github.io/halisi-website/uploads/1787853747237-halisi-dj-logo.jpeg",

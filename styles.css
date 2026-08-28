@@ -385,7 +385,7 @@ img { max-width: 100%; display: block; }
 .hero-title {
   font-size: clamp(3.2rem, 9vw, 6.5rem);
   line-height: 0.95;
-  font-weight: 700;
+  font-weight: 900;
   margin-bottom: 22px;
   text-shadow: 0 4px 30px rgba(0, 0, 0, 0.55);
 }
