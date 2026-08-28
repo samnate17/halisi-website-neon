@@ -46,6 +46,65 @@ body {
   transition: background-color 0.25s ease, color 0.25s ease;
 }
 
+/* Optional site-wide background media, set from the admin panel.
+   When active, body's own background is made transparent so this shows
+   through (see body.has-site-bg below). It sits at z-index:0 rather than a
+   negative value — a negative z-index here would paint behind the browser's
+   own canvas fill (the propagated body background), hiding it entirely.
+   Real content is kept above it via main/footer's own z-index:1 below
+   (sections already carry z-index:1 individually; .hero, main and the
+   footer need it added explicitly since they don't otherwise). */
+.site-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  display: none;
+}
+.site-bg.is-active { display: block; }
+.site-bg-media { position: absolute; inset: 0; }
+.site-bg-media img, .site-bg-media video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.site-bg-overlay {
+  position: absolute;
+  inset: 0;
+  background: var(--bg);
+}
+body.has-site-bg { background: transparent; }
+main, .site-footer { position: relative; z-index: 1; }
+
+/* Homepage background-audio toggle */
+.audio-toggle {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 90;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+.audio-toggle:hover { border-color: var(--accent); box-shadow: var(--shadow-glow); transform: scale(1.05); }
+.audio-toggle svg { width: 18px; height: 18px; }
+.audio-toggle .icon-sound-off { display: block; }
+.audio-toggle .icon-sound-on { display: none; }
+.audio-toggle.is-playing { border-color: var(--accent-2); }
+.audio-toggle.is-playing .icon-sound-off { display: none; }
+.audio-toggle.is-playing .icon-sound-on { display: block; color: var(--accent-2); }
+
 .theme-toggle {
   background: none;
   border: none;
