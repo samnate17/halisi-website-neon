@@ -312,6 +312,8 @@ img { max-width: 100%; display: block; }
   min-height: 100vh;
   display: flex;
   align-items: center;
+  justify-content: center;
+  text-align: center;
   overflow: hidden;
   padding-top: 80px;
 }
@@ -401,12 +403,14 @@ img { max-width: 100%; display: block; }
   display: flex;
   gap: 16px;
   flex-wrap: wrap;
+  justify-content: center;
   margin-bottom: 44px;
 }
 
 .hero-socials {
   display: flex;
   gap: 14px;
+  justify-content: center;
 }
 
 .icon-link {
