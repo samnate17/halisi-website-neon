@@ -4,9 +4,9 @@
     "fontBody": "Inter",
     "accentColor": "#ff2e93",
     "accentColor2": "#22e5ff",
-    "heroTextColor": "",
+    "heroTextColor": "#ffffff",
     "heroFont": "",
-    "heroContrast": 1,
+    "heroContrast": 1.5,
     "iconColor": "#8ec7d2",
     "iconContrast": 0.5
   },
