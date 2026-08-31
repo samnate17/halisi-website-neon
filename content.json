@@ -5,8 +5,8 @@
     "accentColor": "#ff2e93",
     "accentColor2": "#22e5ff",
     "heroTextColor": "",
-    "heroContrast": 1,
     "heroFont": "",
+    "heroContrast": 1,
     "iconColor": "",
     "iconContrast": 0
   },
@@ -35,19 +35,22 @@
       "title": "Afrohouse Thursday set 1",
       "genre": "Afrohouse",
       "duration": "76 min",
-      "listenUrl": "https://soundcloud.com/halisidj/afrohouse-thursday-set-1"
+      "listenUrl": "https://soundcloud.com/halisidj/afrohouse-thursday-set-1",
+      "previewUrl": ""
     },
     {
       "title": "Private School Amapiano",
       "genre": "Amapiano",
       "duration": "99 min",
-      "listenUrl": "https://www.mixcloud.com/HalisiDJ/90-minute-of-private-school-amapiano/"
+      "listenUrl": "https://www.mixcloud.com/HalisiDJ/90-minute-of-private-school-amapiano/",
+      "previewUrl": ""
     },
     {
       "title": "Late night mix",
       "genre": "Afrohouse/Amapiano",
       "duration": "66 min",
-      "listenUrl": "https://www.mixcloud.com/HalisiDJ/late-night-mix/"
+      "listenUrl": "https://www.mixcloud.com/HalisiDJ/late-night-mix/",
+      "previewUrl": ""
     }
   ],
   "events": [
