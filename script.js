@@ -176,6 +176,9 @@ function renderContent(data) {
   if (data.design?.fontBody) root.setProperty('--font-body', `'${data.design.fontBody}', sans-serif`);
   if (data.design?.accentColor) root.setProperty('--accent', data.design.accentColor);
   if (data.design?.accentColor2) root.setProperty('--accent-2', data.design.accentColor2);
+  root.setProperty('--hero-contrast', data.design?.heroContrast != null ? Number(data.design.heroContrast) : 1);
+  if (data.design?.heroTextColor) root.setProperty('--hero-text-color', data.design.heroTextColor);
+  else root.removeProperty('--hero-text-color');
 
   const heroVideoSource = document.getElementById('heroVideoSource');
   const heroVideo = document.getElementById('heroVideo');
