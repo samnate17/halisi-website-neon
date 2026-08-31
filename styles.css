@@ -364,6 +364,7 @@ img { max-width: 100%; display: block; }
 }
 
 .eyebrow {
+  font-family: var(--hero-font, var(--font-body));
   color: var(--hero-text-color, var(--text-dim));
   font-size: 0.85rem;
   letter-spacing: 0.1em;
@@ -383,6 +384,7 @@ img { max-width: 100%; display: block; }
 }
 
 .hero-tagline {
+  font-family: var(--hero-font, var(--font-body));
   max-width: 520px;
   font-size: 1.15rem;
   margin-bottom: 34px;
