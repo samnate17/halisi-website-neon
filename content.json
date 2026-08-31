@@ -3,7 +3,9 @@
     "fontHeading": "Unbounded",
     "fontBody": "Inter",
     "accentColor": "#ff2e93",
-    "accentColor2": "#22e5ff"
+    "accentColor2": "#22e5ff",
+    "heroTextColor": "",
+    "heroContrast": 1
   },
   "media": {
     "logoUrl": "https://samnate17.github.io/halisi-website/uploads/1787853747237-halisi-dj-logo.jpeg",
