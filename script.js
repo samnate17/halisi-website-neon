@@ -181,6 +181,9 @@ function renderContent(data) {
   else root.removeProperty('--hero-text-color');
   if (data.design?.heroFont) root.setProperty('--hero-font', `'${data.design.heroFont}', sans-serif`);
   else root.removeProperty('--hero-font');
+  if (data.design?.iconColor) root.setProperty('--icon-color', data.design.iconColor);
+  else root.removeProperty('--icon-color');
+  root.setProperty('--icon-contrast', data.design?.iconContrast != null ? Number(data.design.iconContrast) : 0);
 
   const heroVideoSource = document.getElementById('heroVideoSource');
   const heroVideo = document.getElementById('heroVideo');
