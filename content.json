@@ -7,8 +7,8 @@
     "heroTextColor": "",
     "heroFont": "",
     "heroContrast": 1,
-    "iconColor": "",
-    "iconContrast": 0
+    "iconColor": "#8ec7d2",
+    "iconContrast": 0.5
   },
   "media": {
     "logoUrl": "https://samnate17.github.io/halisi-website/uploads/1787853747237-halisi-dj-logo.jpeg",
