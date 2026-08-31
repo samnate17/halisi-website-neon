@@ -373,6 +373,7 @@ img { max-width: 100%; display: block; }
 }
 
 .hero-title {
+  font-family: var(--hero-font, var(--font-heading));
   font-size: clamp(3.2rem, 9vw, 6.5rem);
   line-height: 0.95;
   font-weight: 900;
