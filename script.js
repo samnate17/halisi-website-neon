@@ -205,6 +205,15 @@ function renderContent(data) {
   if (heroVideo && data.media?.heroPosterUrl) heroVideo.poster = data.media.heroPosterUrl;
   applyFocal(heroVideo, data.media?.heroVideoPosition, data.media?.heroVideoZoom);
 
+  // Fallback background behind the hero video — shows through if the video
+  // is still loading or fails to play, instead of leaving a blank space.
+  const heroMedia = document.querySelector('.hero-media');
+  if (heroMedia) {
+    heroMedia.style.backgroundImage = data.media?.heroPosterUrl
+      ? `url("${data.media.heroPosterUrl}")`
+      : '';
+  }
+
   const pressPhoto = document.getElementById('pressPhoto');
   if (pressPhoto && data.media?.pressPhotoUrl) pressPhoto.src = data.media.pressPhotoUrl;
   applyFocal(pressPhoto, data.media?.pressPhotoPosition, data.media?.pressPhotoZoom);
