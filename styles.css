@@ -211,9 +211,15 @@ img { max-width: 100%; display: block; }
 .btn-primary {
   background: var(--grad);
   color: #0a0a12;
-  box-shadow: var(--shadow-glow);
+  /* Two shadows, biased to each side and colored to match that end of the
+     gradient (pink on the left, cyan on the right) — a single fixed-pink
+     glow (the old var(--shadow-glow)) bled a mismatched pink halo around
+     the button's cyan end. */
+  box-shadow: -6px 0 20px rgba(255, 46, 147, 0.35), 6px 0 20px rgba(34, 229, 255, 0.35);
 }
-.btn-primary:hover { box-shadow: 0 0 55px rgba(255, 46, 147, 0.5); }
+.btn-primary:hover {
+  box-shadow: -8px 0 28px rgba(255, 46, 147, 0.45), 8px 0 28px rgba(34, 229, 255, 0.45);
+}
 
 .btn-outline {
   border-color: var(--border);
@@ -418,6 +424,15 @@ img { max-width: 100%; display: block; }
   transition: all 0.15s ease;
   font-size: 0.75rem;
   font-weight: 700;
+}
+/* Icons in the hero sit over the video, not the page background, so their
+   backdrop needs to contrast with the (theme-independent) video rather than
+   match the current theme — same reasoning as the hero title's shadow
+   always being black. A light/pastel icon color would otherwise all but
+   disappear against the light-theme page-colored backdrop above. */
+.hero-socials .icon-link {
+  background: rgba(0, 0, 0, var(--icon-contrast, 0.35));
+  border-color: rgba(255, 255, 255, 0.25);
 }
 .icon-link:hover {
   color: #0a0a12;
