@@ -430,6 +430,13 @@ img { max-width: 100%; display: block; }
   border-radius: 50%;
   border: 1px solid var(--header-border-strong);
   background: rgba(var(--bg-rgb), var(--icon-contrast, 0));
+  /* A background image is sized to the padding box by default but painted
+     across the border box, so the hover gradient was tiled to cover the 1px
+     border ring - putting the cyan end down the left edge and the pink end
+     down the right. Size it to the border box so one gradient spans the
+     whole button. */
+  background-origin: border-box;
+  background-repeat: no-repeat;
   color: var(--icon-color, var(--text));
   transition: all 0.15s ease;
   font-size: 0.75rem;
@@ -447,6 +454,10 @@ img { max-width: 100%; display: block; }
 .icon-link:hover {
   color: #0a0a12;
   background: var(--grad);
+  /* The shorthand above resets background-origin, so restate it here or the
+     gradient goes back to being tiled over the border ring. */
+  background-origin: border-box;
+  background-repeat: no-repeat;
   border-color: transparent;
   transform: translateY(-2px);
 }
