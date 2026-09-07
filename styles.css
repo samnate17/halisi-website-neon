@@ -84,7 +84,7 @@ main, .site-footer { position: relative; z-index: 1; }
 .audio-toggle {
   position: fixed;
   right: 20px;
-  bottom: 20px;
+  bottom: calc(20px + env(safe-area-inset-bottom, 0px));
   z-index: 90;
   width: 46px;
   height: 46px;
@@ -113,7 +113,7 @@ main, .site-footer { position: relative; z-index: 1; }
 .theme-toggle {
   position: fixed;
   left: 20px;
-  bottom: 20px;
+  bottom: calc(20px + env(safe-area-inset-bottom, 0px));
   z-index: 90;
   height: 23px;
   padding: 0 9px;
@@ -154,7 +154,7 @@ img { max-width: 100%; display: block; }
 .container {
   max-width: var(--max-w);
   margin: 0 auto;
-  padding: 0 24px;
+  padding: 0 max(24px, env(safe-area-inset-left, 0px)) 0 max(24px, env(safe-area-inset-right, 0px));
 }
 
 .noise-overlay {
@@ -242,6 +242,9 @@ img { max-width: 100%; display: block; }
   position: fixed;
   top: 0; left: 0; right: 0;
   z-index: 100;
+  /* viewport-fit=cover lets the page paint under the status bar and home
+     indicator, so pull the contents back inside the safe area. */
+  padding-top: env(safe-area-inset-top, 0px);
   border-bottom: 1px solid transparent;
   transition: background 0.25s ease, border-color 0.25s ease;
 }
@@ -469,7 +472,7 @@ img { max-width: 100%; display: block; }
 
 .scroll-cue {
   position: absolute;
-  bottom: 32px;
+  bottom: calc(32px + env(safe-area-inset-bottom, 0px));
   left: 50%;
   transform: translateX(-50%);
   color: var(--text-dim);
@@ -886,7 +889,7 @@ input:focus, select:focus, textarea:focus {
 @media (max-width: 720px) {
   .nav-links {
     position: fixed;
-    top: 68px; left: 0; right: 0;
+    top: calc(68px + env(safe-area-inset-top, 0px)); left: 0; right: 0;
     flex-direction: column;
     align-items: flex-start;
     gap: 0;
