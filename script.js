@@ -21,11 +21,19 @@ navLinks.querySelectorAll('a').forEach((link) => {
   });
 });
 
-// Header shadow on scroll
+// Header turns opaque once the hero has scrolled past
 const header = document.querySelector('.site-header');
-window.addEventListener('scroll', () => {
-  header.classList.toggle('scrolled', window.scrollY > 10);
-});
+const heroSection = document.querySelector('.hero');
+
+const updateHeaderState = () => {
+  // Swap in the solid header just as the hero clears the header's own height.
+  const threshold = heroSection ? heroSection.offsetHeight - header.offsetHeight : 10;
+  header.classList.toggle('scrolled', window.scrollY > threshold);
+};
+
+window.addEventListener('scroll', updateHeaderState, { passive: true });
+window.addEventListener('resize', updateHeaderState);
+updateHeaderState();
 
 // Mix "play" — plays ~20s of the mix's preview clip (if one was uploaded in
 // the admin) while the button morphs into a running equalizer. Falls back to
