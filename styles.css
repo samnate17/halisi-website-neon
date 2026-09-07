@@ -328,7 +328,11 @@ img { max-width: 100%; display: block; }
      it resizes the hero mid-scroll and that is what caused the glimpse. The
      vh line stays as a fallback for browsers without lvh. */
   min-height: 100vh;
-  min-height: 100lvh;
+  /* Under viewport-fit=cover iOS does not reliably count the home-indicator
+     inset in lvh, leaving a strip at the bottom where the next section shows
+     through. Add that inset back so the hero always overshoots the screen
+     rather than falling short of it. */
+  min-height: calc(100lvh + env(safe-area-inset-bottom, 0px));
   display: flex;
   align-items: center;
   justify-content: center;
