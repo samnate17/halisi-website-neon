@@ -332,7 +332,7 @@ img { max-width: 100%; display: block; }
      inset in lvh, leaving a strip at the bottom where the next section shows
      through. Add that inset back so the hero always overshoots the screen
      rather than falling short of it. */
-  min-height: calc(100lvh + env(safe-area-inset-bottom, 0px));
+  min-height: var(--hero-height, calc(100lvh + env(safe-area-inset-bottom, 0px)));
   display: flex;
   align-items: center;
   justify-content: center;

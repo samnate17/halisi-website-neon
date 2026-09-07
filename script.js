@@ -21,9 +21,41 @@ navLinks.querySelectorAll('a').forEach((link) => {
   });
 });
 
+// Hero height, measured rather than trusted to CSS.
+//
+// iOS reports viewport units inconsistently under viewport-fit=cover, so the
+// hero could end up fractionally shorter than the screen and the section below
+// showed along the bottom edge. Measuring the screen sidesteps every one of
+// those unit quirks.
+//
+// Touch devices only: they are the ones with toolbars that collapse and grow
+// the viewport mid-scroll. A desktop window has no such behaviour, and sizing
+// its hero to the whole monitor would be wrong, so there the CSS value stands.
+const heroSection = document.querySelector('.hero');
+
+const sizeHeroToScreen = () => {
+  const root = document.documentElement.style;
+  if (!heroSection || !window.matchMedia('(pointer: coarse)').matches) {
+    root.removeProperty('--hero-height');
+    return;
+  }
+  // screen.width/height do not swap on orientation change in every browser,
+  // so choose the side by the orientation we can actually measure.
+  const landscape = window.innerWidth > window.innerHeight;
+  const screenLong = Math.max(screen.width, screen.height);
+  const screenShort = Math.min(screen.width, screen.height);
+  const screenHeight = landscape ? screenShort : screenLong;
+  // Never shorter than what is on screen now, never shorter than the screen.
+  root.setProperty('--hero-height', Math.max(window.innerHeight, screenHeight) + 'px');
+};
+
+sizeHeroToScreen();
+window.addEventListener('resize', sizeHeroToScreen);
+// Orientation reports the new size a beat after the event fires.
+window.addEventListener('orientationchange', () => setTimeout(sizeHeroToScreen, 300));
+
 // Header turns opaque once the hero has scrolled past
 const header = document.querySelector('.site-header');
-const heroSection = document.querySelector('.hero');
 
 const updateHeaderState = () => {
   // Swap in the solid header just as the hero clears the header's own height.
