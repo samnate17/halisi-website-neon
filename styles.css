@@ -321,12 +321,14 @@ img { max-width: 100%; display: block; }
 /* Hero */
 .hero {
   position: relative;
-  /* 100vh on a phone means the screen with the browser's address bar hidden,
-     so the hero ran taller than the part you can actually see. dvh tracks the
-     visible viewport instead; the vh line stays as a fallback for browsers
-     that do not understand it. */
+  /* lvh is the screen with the browser's toolbars retracted - the tallest the
+     viewport ever gets. Sizing to it means the hero always covers the screen
+     whatever the toolbars are doing, so the next section can never slide into
+     view while they animate. dvh would track the visible height exactly, but
+     it resizes the hero mid-scroll and that is what caused the glimpse. The
+     vh line stays as a fallback for browsers without lvh. */
   min-height: 100vh;
-  min-height: 100dvh;
+  min-height: 100lvh;
   display: flex;
   align-items: center;
   justify-content: center;
