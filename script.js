@@ -523,17 +523,28 @@ function currentTheme() {
   return document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
 }
 
+function syncBrowserChrome() {
+  // Safari paints its address bar with this colour, so keeping it equal to the
+  // page background stops the toolbar reading as a separate band.
+  const meta = document.querySelector('meta[name="theme-color"]');
+  if (!meta) return;
+  const bg = getComputedStyle(document.documentElement).getPropertyValue('--bg').trim();
+  if (bg) meta.setAttribute('content', bg);
+}
+
 function updateThemeLabel() {
   if (themeToggle) themeToggle.textContent = currentTheme() === 'dark' ? 'Light mode' : 'Dark mode';
 }
 
 updateThemeLabel();
+syncBrowserChrome();
 
 themeToggle?.addEventListener('click', () => {
   const next = currentTheme() === 'light' ? 'dark' : 'light';
   document.documentElement.setAttribute('data-theme', next);
   try { localStorage.setItem(THEME_KEY, next); } catch (e) {}
   updateThemeLabel();
+  syncBrowserChrome();
 });
 
 // Homepage background-audio toggle
