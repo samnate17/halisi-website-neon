@@ -318,7 +318,12 @@ img { max-width: 100%; display: block; }
 /* Hero */
 .hero {
   position: relative;
+  /* 100vh on a phone means the screen with the browser's address bar hidden,
+     so the hero ran taller than the part you can actually see. dvh tracks the
+     visible viewport instead; the vh line stays as a fallback for browsers
+     that do not understand it. */
   min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -886,12 +891,14 @@ input:focus, select:focus, textarea:focus {
     align-items: flex-start;
     gap: 0;
     background: var(--bg-alt);
-    border-bottom: 1px solid var(--border);
+    /* max-height:0 clips the menu's contents but not its border, so this
+       border kept painting a second line a few pixels under the header while
+       the menu was closed. Draw it only when the menu is open. */
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.25s ease;
   }
-  .nav-links.open { max-height: 380px; }
+  .nav-links.open { max-height: 380px; border-bottom: 1px solid var(--border); }
   .nav-links li { width: 100%; }
   .nav-links a { display: block; padding: 16px 24px; width: 100%; text-align: left; }
   .nav-cta { border-radius: 0; text-align: center; }
