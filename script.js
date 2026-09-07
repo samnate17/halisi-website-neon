@@ -35,6 +35,28 @@ window.addEventListener('scroll', updateHeaderState, { passive: true });
 window.addEventListener('resize', updateHeaderState);
 updateHeaderState();
 
+// SoundCloud mixes play inline through SoundCloud's own embed widget rather
+// than sending people off to soundcloud.com. Public tracks play in full for
+// any visitor - no account or sign-in on their side.
+function mixEmbed(url) {
+  if (!url) return null;
+  let host;
+  try {
+    host = new URL(url).hostname.replace(/^www\./, '');
+  } catch (e) {
+    return null;
+  }
+  if (host === 'soundcloud.com' || host === 'm.soundcloud.com') {
+    const params = new URLSearchParams({
+      url, auto_play: 'true', hide_related: 'true', show_comments: 'false',
+      show_user: 'true', show_teaser: 'false', visual: 'false', color: '#ff2e93'
+    });
+    return { src: `https://w.soundcloud.com/player/?${params}`, height: 166 };
+  }
+  // Anything else keeps the old behaviour: the Listen link opens the host site.
+  return null;
+}
+
 // Mix "play" — plays ~20s of the mix's preview clip (if one was uploaded in
 // the admin) while the button morphs into a running equalizer. Falls back to
 // a visual-only toggle when a mix has no preview clip set.
@@ -45,7 +67,11 @@ let previewTimer = null;
 function stopPreview(mixCards) {
   clearTimeout(previewTimer);
   previewAudio?.pause();
-  mixCards.forEach((c) => c.classList.remove('playing'));
+  mixCards.forEach((c) => {
+    c.querySelector('.mix-player')?.remove();
+    c.classList.remove('playing');
+    c.querySelector('.play-btn')?.setAttribute('aria-label', 'Play mix');
+  });
 }
 
 function wireMixCards() {
@@ -63,6 +89,25 @@ function wireMixCards() {
       const wasPlaying = card.classList.contains('playing');
       stopPreview(mixCards);
       if (wasPlaying) return;
+
+      const embed = mixEmbed(card.dataset.listenUrl);
+      if (embed) {
+        card.classList.add('playing');
+        btn.setAttribute('aria-label', 'Stop mix');
+        const wrap = document.createElement('div');
+        wrap.className = 'mix-player';
+        const frame = document.createElement('iframe');
+        frame.src = embed.src;
+        frame.width = '100%';
+        frame.height = embed.height;
+        frame.setAttribute('frameborder', '0');
+        frame.setAttribute('scrolling', 'no');
+        frame.setAttribute('allow', 'autoplay; encrypted-media; fullscreen');
+        frame.title = `Player for ${card.querySelector('h3')?.textContent || 'mix'}`;
+        wrap.appendChild(frame);
+        card.appendChild(wrap);
+        return;
+      }
 
       const url = card.dataset.previewUrl;
       if (!url) {
@@ -294,7 +339,7 @@ function renderContent(data) {
   const mixesGrid = document.getElementById('mixesGrid');
   if (mixesGrid && Array.isArray(data.mixes)) {
     mixesGrid.innerHTML = data.mixes.map((mix) => `
-      <article class="mix-card" data-mix${mix.previewUrl ? ` data-preview-url="${escapeHtml(mix.previewUrl)}"` : ''}>
+      <article class="mix-card" data-mix${mix.listenUrl ? ` data-listen-url="${escapeHtml(mix.listenUrl)}"` : ''}${mix.previewUrl ? ` data-preview-url="${escapeHtml(mix.previewUrl)}"` : ''}>
         <button class="play-btn" aria-label="Play mix">${PLAY_ICON}</button>
         <div class="mix-info">
           <h3>${escapeHtml(mix.title)}</h3>
