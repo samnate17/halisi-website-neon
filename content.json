@@ -32,6 +32,13 @@
   },
   "mixes": [
     {
+      "title": "Amapiano Day Party",
+      "genre": "Amapiano",
+      "duration": "52:59",
+      "listenUrl": "https://soundcloud.com/halisidj/miracle-of-science-1-maji?si=5c9d2a75b96e46a0900bb4ce73eb2b61&utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing",
+      "previewUrl": ""
+    },
+    {
       "title": "Afrohouse Thursday set 1",
       "genre": "Afrohouse",
       "duration": "76 min",
@@ -42,41 +49,13 @@
       "title": "Private School Amapiano",
       "genre": "Amapiano",
       "duration": "99 min",
-      "listenUrl": "https://www.mixcloud.com/HalisiDJ/90-minute-of-private-school-amapiano/",
-      "previewUrl": ""
-    },
-    {
-      "title": "Late night mix",
-      "genre": "Afrohouse/Amapiano",
-      "duration": "66 min",
-      "listenUrl": "https://www.mixcloud.com/HalisiDJ/late-night-mix/",
+      "listenUrl": "https://soundcloud.com/halisidj/private-school-amapiano?si=1e485c7982e44ba5b0507e0be067895e&utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing",
       "previewUrl": ""
     }
   ],
-  "events": [
-    {
-      "imagePosition": "23% 54%",
-      "imageZoom": "1",
-      "day": "6",
-      "month": "Sep",
-      "title": "Maji Mazuri",
-      "venue": "Miracle of science Bar and grill, Cambridge",
-      "ticketUrl": "https://partiful.com/e/2pxZHfe6rzPcYXkWQMAX?utm_source=ig&utm_medium=social&utm_content=link_in_bio&fbclid=PAdGRleAT9K91wZG9mAmZkaWQWUNTUhSCeCuzvD6pa7lsoRH6VzXP1JmV4dG4DYWVtAjExAHNydGMGYXBwX2lkDzEyNDAyNDU3NDI4NzQxNAABp-l9-jQo1V6Gk5SuLaOkt2On8bHgZ49OhNutenLkc_8rw43TU4Fhe_MglRuE_aem_4DaU9M5v4zH6MHJjY2bQJg",
-      "imageUrl": "https://samnate17.github.io/halisi-website/uploads/1787925638238-miracle-of-science-poster.jpeg"
-    }
-  ],
+  "events": [],
   "merch": [],
-  "unavailableDates": [
-    {
-      "date": "2026-09-06"
-    },
-    {
-      "date": "2026-10-01"
-    },
-    {
-      "date": "2026-09-13"
-    }
-  ],
+  "unavailableDates": [],
   "booking": {
     "blurb": "Private gigs, clubs, and day parties. Send the details below and expect a reply within 48 hours.",
     "email": "halisidj@gmail.com"
