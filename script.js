@@ -472,7 +472,9 @@ function renderCalendar() {
   });
 }
 
-fetch('content.json')
+// no-cache revalidates with the server on every load, so an edit saved in the
+// admin shows up immediately instead of waiting out the CDN's cache window.
+fetch('content.json', { cache: 'no-cache' })
   .then((res) => res.json())
   .then(renderContent)
   .catch((err) => console.error('Could not load content.json', err));
