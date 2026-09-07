@@ -844,6 +844,11 @@ input:focus, select:focus, textarea:focus {
 }
 .footer-brand .logo-img { height: 24px; }
 
+.events-empty {
+  color: var(--text-dim);
+  padding: 8px 0;
+}
+
 /* Responsive */
 @media (max-width: 900px) {
   .bio-grid, .booking-grid { grid-template-columns: 1fr; }

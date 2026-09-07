@@ -80,6 +80,47 @@ function wireMixCards() {
 }
 
 // Render site content from content.json (edited via /admin)
+// Events carry a day and a month name but no year, so work out which year puts
+// the event nearest to today. An explicit `date` (YYYY-MM-DD) or `year` on the
+// event always wins over that guess.
+const EVENT_MONTHS = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
+const SIX_MONTHS_MS = 183 * 24 * 60 * 60 * 1000;
+
+function startOfToday() {
+  const d = new Date();
+  d.setHours(0, 0, 0, 0);
+  return d;
+}
+
+function eventDate(ev) {
+  if (ev.date) {
+    const explicit = new Date(`${ev.date}T00:00:00`);
+    if (!isNaN(explicit)) return explicit;
+  }
+  const month = EVENT_MONTHS.indexOf(String(ev.month || '').trim().slice(0, 3).toLowerCase());
+  const day = parseInt(ev.day, 10);
+  // Anything we cannot read stays on the page rather than vanishing silently.
+  if (month < 0 || !day) return null;
+  if (ev.year) return new Date(Number(ev.year), month, day);
+
+  const today = startOfToday();
+  let when = new Date(today.getFullYear(), month, day);
+  if (today - when > SIX_MONTHS_MS) when = new Date(today.getFullYear() + 1, month, day);
+  else if (when - today > SIX_MONTHS_MS) when = new Date(today.getFullYear() - 1, month, day);
+  return when;
+}
+
+// Drops shows whose date has gone by and puts the rest in date order. An event
+// stays up for the whole of its own day, so a gig tonight is still listed.
+function upcomingEvents(events) {
+  const today = startOfToday();
+  return events
+    .map((ev) => ({ ev, on: eventDate(ev) }))
+    .filter(({ on }) => !on || on >= today)
+    .sort((a, b) => (a.on && b.on ? a.on - b.on : 0))
+    .map(({ ev }) => ev);
+}
+
 function escapeHtml(str) {
   const div = document.createElement('div');
   div.textContent = str == null ? '' : String(str);
@@ -266,7 +307,10 @@ function renderContent(data) {
 
   const eventsList = document.getElementById('eventsList');
   if (eventsList && Array.isArray(data.events)) {
-    eventsList.innerHTML = data.events.map((ev) => `
+    const upcoming = upcomingEvents(data.events);
+    eventsList.innerHTML = !upcoming.length
+      ? `<p class="events-empty">No upcoming shows right now — check back soon.</p>`
+      : upcoming.map((ev) => `
       <div class="event-row">
         <div class="event-date"><span class="day">${escapeHtml(ev.day)}</span><span class="month">${escapeHtml(ev.month)}</span></div>
         <div class="event-details">
