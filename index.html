@@ -3,6 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<!-- Tints the browser's own toolbars (Safari's address bar) to match the page. -->
+<meta name="theme-color" content="#0a0a12">
 <title>Halisi — Afrobeats / Amapiano / Afrohouse DJ</title>
 <meta name="description" content="Halisi — Kenyan-born DJ specializing in Afrobeats, Amapiano &amp; Afrohouse. Mixes, upcoming shows, and booking.">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎧</text></svg>">
@@ -16,6 +18,8 @@
     var saved = localStorage.getItem('halisi-theme');
     var theme = saved || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
     document.documentElement.setAttribute('data-theme', theme);
+    var tc = document.querySelector('meta[name="theme-color"]');
+    if (tc) tc.setAttribute('content', theme === 'light' ? '#ffffff' : '#0a0a12');
   } catch (e) {}
 })();
 </script>
