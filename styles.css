@@ -610,7 +610,16 @@ section:not(.hero) { padding: 110px 0; position: relative; z-index: 1; }
 }
 
 .mix-info { flex: 1; min-width: 140px; }
-.mix-card .btn-small { flex-shrink: 0; }
+.mix-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+  /* Absorbs the leftover space on whichever flex line it lands on, so
+     Listen + Share stay pinned to the card's right edge whether the title
+     wraps onto its own line or not. */
+  margin-left: auto;
+}
 .mix-info h3 { font-size: 1.05rem; margin-bottom: 4px; }
 .mix-meta { margin: 0; font-size: 0.85rem; color: var(--text-dim); }
 

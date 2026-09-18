@@ -416,8 +416,10 @@ function renderContent(data) {
           <h3>${escapeHtml(mix.title)}</h3>
           <p class="mix-meta">${escapeHtml(mix.genre)} · ${escapeHtml(mix.duration)}</p>
         </div>
-        <a href="${escapeHtml(mix.listenUrl || '#')}" class="btn btn-small" target="_blank" rel="noopener">Listen</a>
-        ${shareIconButton(id, mix.title)}
+        <div class="mix-actions">
+          <a href="${escapeHtml(mix.listenUrl || '#')}" class="btn btn-small" target="_blank" rel="noopener">Listen</a>
+          ${shareIconButton(id, mix.title)}
+        </div>
       </article>
     `;
     }).join('');
