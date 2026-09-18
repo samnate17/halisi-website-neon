@@ -595,6 +595,47 @@ audioToggle?.addEventListener('click', () => {
   }
 });
 
+// Section share buttons — copy (or native-share) a link straight to that
+// section, so a mix or a show can be shared without sending people through
+// the homepage first.
+document.querySelectorAll('[data-share-section]').forEach((btn) => {
+  const label = btn.querySelector('.share-label');
+  let resetTimer = null;
+
+  const flash = (text) => {
+    if (!label) return;
+    clearTimeout(resetTimer);
+    label.textContent = text;
+    btn.classList.add('copied');
+    resetTimer = setTimeout(() => {
+      label.textContent = 'Share';
+      btn.classList.remove('copied');
+    }, 1800);
+  };
+
+  btn.addEventListener('click', async () => {
+    const url = `${location.origin}${location.pathname}#${btn.dataset.shareSection}`;
+    const title = btn.dataset.shareTitle || document.title;
+
+    if (navigator.share) {
+      try {
+        await navigator.share({ title, url });
+      } catch (err) {
+        // AbortError = user cancelled the native share sheet; leave the button as-is.
+        if (err?.name !== 'AbortError') flash('Failed');
+      }
+      return;
+    }
+
+    try {
+      await navigator.clipboard.writeText(url);
+      flash('Copied!');
+    } catch (err) {
+      window.prompt('Copy this link:', url);
+    }
+  });
+});
+
 // Scroll-reveal for sections
 const revealEls = document.querySelectorAll('.reveal');
 if ('IntersectionObserver' in window && revealEls.length) {
