@@ -1,3 +1,18 @@
+// A share link may point at a specific mix/event (e.g. #mix-amapiano-day-party).
+// Those elements don't exist yet at this point — they're rendered from
+// content.json, which loads async — so the browser's own "scroll to
+// fragment" on page load has nothing to find and gives up. Captured once
+// here, then re-applied after that content renders (see wireMixCards call
+// site), so a share link reliably lands on the exact item, not just the top
+// of the page.
+const initialHash = location.hash;
+function scrollToInitialHash() {
+  if (!initialHash) return;
+  let target;
+  try { target = document.querySelector(initialHash); } catch (e) { return; }
+  target?.scrollIntoView({ block: 'start' });
+}
+
 // Pause the hero video for users who prefer reduced motion
 const heroVideo = document.querySelector('.hero-video');
 if (heroVideo && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
@@ -223,6 +238,27 @@ function focalStyleAttr(position, zoom) {
 
 const PLAY_ICON = '<svg class="icon-play" viewBox="0 0 24 24" width="22" height="22"><path fill="currentColor" d="M8 5v14l11-7z"/></svg><svg class="icon-pause" viewBox="0 0 24 24" width="22" height="22" hidden><path fill="currentColor" d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg><span class="eq"><i></i><i></i><i></i><i></i></span>';
 
+const SHARE_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7"></path><polyline points="16 6 12 2 8 6"></polyline><line x1="12" y1="2" x2="12" y2="15"></line></svg>';
+
+// Turns a mix/event title into a stable-ish URL fragment id ("mix-...",
+// "event-..."), de-duped against ids already used in this render so two
+// same-titled items don't collide on one page.
+function slugify(str) {
+  return String(str || '').toLowerCase().trim().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '') || 'item';
+}
+function uniqueSlugId(prefix, title, usedIds) {
+  const base = `${prefix}-${slugify(title)}`;
+  let id = base;
+  let n = 2;
+  while (usedIds.has(id)) id = `${base}-${n++}`;
+  usedIds.add(id);
+  return id;
+}
+function shareIconButton(id, title) {
+  const url = `${location.origin}${location.pathname}#${id}`;
+  return `<button type="button" class="icon-share-btn" data-share-url="${escapeHtml(url)}" data-share-title="${escapeHtml(title)}" aria-label="Share ${escapeHtml(title)}">${SHARE_ICON}</button>`;
+}
+
 // Optional full-page background media (image or video), set from the admin
 // panel. Video vs. image is inferred from the file extension.
 function applySiteBackground(media) {
@@ -370,25 +406,33 @@ function renderContent(data) {
 
   const mixesGrid = document.getElementById('mixesGrid');
   if (mixesGrid && Array.isArray(data.mixes)) {
-    mixesGrid.innerHTML = data.mixes.map((mix) => `
-      <article class="mix-card" data-mix${mix.listenUrl ? ` data-listen-url="${escapeHtml(mix.listenUrl)}"` : ''}${mix.previewUrl ? ` data-preview-url="${escapeHtml(mix.previewUrl)}"` : ''}>
+    const usedMixIds = new Set();
+    mixesGrid.innerHTML = data.mixes.map((mix) => {
+      const id = uniqueSlugId('mix', mix.title, usedMixIds);
+      return `
+      <article class="mix-card" id="${id}" data-mix${mix.listenUrl ? ` data-listen-url="${escapeHtml(mix.listenUrl)}"` : ''}${mix.previewUrl ? ` data-preview-url="${escapeHtml(mix.previewUrl)}"` : ''}>
         <button class="play-btn" aria-label="Play mix">${PLAY_ICON}</button>
         <div class="mix-info">
           <h3>${escapeHtml(mix.title)}</h3>
           <p class="mix-meta">${escapeHtml(mix.genre)} · ${escapeHtml(mix.duration)}</p>
         </div>
         <a href="${escapeHtml(mix.listenUrl || '#')}" class="btn btn-small" target="_blank" rel="noopener">Listen</a>
+        ${shareIconButton(id, mix.title)}
       </article>
-    `).join('');
+    `;
+    }).join('');
   }
 
   const eventsList = document.getElementById('eventsList');
   if (eventsList && Array.isArray(data.events)) {
     const upcoming = upcomingEvents(data.events);
+    const usedEventIds = new Set();
     eventsList.innerHTML = !upcoming.length
       ? `<p class="events-empty">No upcoming shows right now — check back soon.</p>`
-      : upcoming.map((ev) => `
-      <div class="event-row">
+      : upcoming.map((ev) => {
+      const id = uniqueSlugId('event', ev.title, usedEventIds);
+      return `
+      <div class="event-row" id="${id}">
         <div class="event-date"><span class="day">${escapeHtml(ev.day)}</span><span class="month">${escapeHtml(ev.month)}</span></div>
         <div class="event-details">
           <h3>${escapeHtml(ev.title)}</h3>
@@ -396,8 +440,10 @@ function renderContent(data) {
         </div>
         ${ev.imageUrl ? `<span class="event-thumb-wrap"><img class="event-thumb" src="${escapeHtml(ev.imageUrl)}" alt="" style="${focalStyleAttr(ev.imagePosition, ev.imageZoom)}"></span>` : ''}
         <a href="${escapeHtml(ev.ticketUrl || '#')}" class="btn btn-small">Tickets</a>
+        ${shareIconButton(id, ev.title)}
       </div>
-    `).join('');
+    `;
+    }).join('');
   }
 
   const merchGrid = document.getElementById('merchGrid');
@@ -439,6 +485,7 @@ function renderContent(data) {
   renderCalendar();
 
   wireMixCards();
+  scrollToInitialHash();
 }
 
 // Availability calendar
@@ -595,45 +642,41 @@ audioToggle?.addEventListener('click', () => {
   }
 });
 
-// Section share buttons — copy (or native-share) a link straight to that
-// section, so a mix or a show can be shared without sending people through
-// the homepage first.
-document.querySelectorAll('[data-share-section]').forEach((btn) => {
-  const label = btn.querySelector('.share-label');
-  let resetTimer = null;
+// Per-item share icons on mix cards and event rows — copies (or
+// native-shares) a link straight to that one mix/show, so it can be shared
+// without sending people through the homepage first. Delegated on document
+// since these buttons live inside content rendered from content.json.
+let shareFlashTimer = null;
+document.addEventListener('click', async (e) => {
+  const btn = e.target.closest('.icon-share-btn');
+  if (!btn) return;
+  const url = btn.dataset.shareUrl;
+  const title = btn.dataset.shareTitle || document.title;
+  if (!url) return;
 
   const flash = (text) => {
-    if (!label) return;
-    clearTimeout(resetTimer);
-    label.textContent = text;
-    btn.classList.add('copied');
-    resetTimer = setTimeout(() => {
-      label.textContent = 'Share';
-      btn.classList.remove('copied');
-    }, 1800);
+    clearTimeout(shareFlashTimer);
+    btn.dataset.feedback = text;
+    btn.classList.add('flash');
+    shareFlashTimer = setTimeout(() => btn.classList.remove('flash'), 1600);
   };
 
-  btn.addEventListener('click', async () => {
-    const url = `${location.origin}${location.pathname}#${btn.dataset.shareSection}`;
-    const title = btn.dataset.shareTitle || document.title;
-
-    if (navigator.share) {
-      try {
-        await navigator.share({ title, url });
-      } catch (err) {
-        // AbortError = user cancelled the native share sheet; leave the button as-is.
-        if (err?.name !== 'AbortError') flash('Failed');
-      }
-      return;
-    }
-
+  if (navigator.share) {
     try {
-      await navigator.clipboard.writeText(url);
-      flash('Copied!');
+      await navigator.share({ title, url });
     } catch (err) {
-      window.prompt('Copy this link:', url);
+      // AbortError = user cancelled the native share sheet; leave the button as-is.
+      if (err?.name !== 'AbortError') flash('Failed');
     }
-  });
+    return;
+  }
+
+  try {
+    await navigator.clipboard.writeText(url);
+    flash('Copied!');
+  } catch (err) {
+    window.prompt('Copy this link:', url);
+  }
 });
 
 // Scroll-reveal for sections
