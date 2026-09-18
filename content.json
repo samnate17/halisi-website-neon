@@ -60,7 +60,19 @@
       "previewUrl": ""
     }
   ],
-  "events": [],
+  "events": [
+    {
+      "imagePosition": "50% 50%",
+      "imageZoom": "1",
+      "date": "2026-10-01",
+      "title": "Maji Mazuri",
+      "venue": "Middlesex Lounge, Cambridge ",
+      "ticketUrl": "https://posh.vip/e/maji-mazuri-at-middlesex-lounge",
+      "imageUrl": "https://samnate17.github.io/halisi-website/uploads/1789758101584-img-2126.jpeg",
+      "day": "1",
+      "month": "Oct"
+    }
+  ],
   "merch": [],
   "unavailableDates": [
     {
