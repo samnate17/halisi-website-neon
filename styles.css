@@ -608,7 +608,7 @@ section:not(.hero) { padding: 110px 0; position: relative; z-index: 1; }
   50% { transform: scaleY(1); }
 }
 
-.mix-info { flex: 1; min-width: 0; }
+.mix-info { flex: 1; min-width: 140px; }
 .mix-card .btn-small { flex-shrink: 0; }
 .mix-info h3 { font-size: 1.05rem; margin-bottom: 4px; }
 .mix-meta { margin: 0; font-size: 0.85rem; color: var(--text-dim); }
