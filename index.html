@@ -65,8 +65,12 @@
 
   <section class="hero" id="home">
     <div class="hero-media">
-      <video class="hero-video" id="heroVideo" autoplay muted loop playsinline>
-        <source id="heroVideoSource" src="https://assets.mixkit.co/videos/4026/4026-360.mp4" type="video/mp4">
+      <!-- Real video + poster baked in as defaults, same reasoning as the
+           press photo above: script.js only swaps these in after
+           content.json loads, so a generic default would otherwise flash
+           (or show up in a link preview) before that happens. -->
+      <video class="hero-video" id="heroVideo" autoplay muted loop playsinline poster="https://samnate17.github.io/halisi-website/uploads/1787843745294-halisi-dj-logo.jpeg">
+        <source id="heroVideoSource" src="https://samnate17.github.io/halisi-website/uploads/1787846426008-dj-animation-no-words-.mp4" type="video/mp4">
       </video>
     </div>
     <div class="hero-glow"></div>
