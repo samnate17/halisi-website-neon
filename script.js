@@ -490,6 +490,18 @@ function renderContent(data) {
   scrollToInitialHash();
 }
 
+// Lets the admin panel's live preview re-render this page with unsaved edits
+// while it's sitting in an <iframe>. A plain `iframe.contentWindow.renderContent(...)`
+// call only works when the admin panel and this site share an origin — once
+// this site has a custom domain (or the admin panel runs from localhost/file://,
+// which it always does), that's no longer true, and browsers block reaching
+// into a cross-origin frame. postMessage has no such restriction.
+window.addEventListener('message', (event) => {
+  if (event.data && event.data.source === 'halisi-admin-preview' && event.data.type === 'render') {
+    renderContent(event.data.payload);
+  }
+});
+
 // Availability calendar
 let unavailableDatesCache = [];
 let calendarMonthOffset = 0;
