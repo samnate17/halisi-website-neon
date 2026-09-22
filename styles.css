@@ -24,13 +24,22 @@
      of curved glass) and a soft outer shadow for lift. Used on the header,
      floating controls, buttons and cards. Dark-mode glass is a light tint
      over a dark backdrop; light mode below inverts that (a light tint is
-     invisible on a white backdrop, so it switches to a dark one). */
-  --glass-bg: rgba(255, 255, 255, 0.07);
-  --glass-bg-strong: rgba(255, 255, 255, 0.12);
-  --glass-border: rgba(255, 255, 255, 0.14);
-  --glass-highlight: rgba(255, 255, 255, 0.5);
-  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.28);
-  --glass-blur: 22px;
+     invisible on a white backdrop, so it switches to a dark one).
+
+     Every visible property is a calc() off the single --glass-intensity
+     knob (0-1, admin-editable — see media.glassIntensity in script.js,
+     applied the same way as --icon-contrast) so the admin's slider moves
+     blur, tint and highlight together instead of needing one control per
+     property. The literal numbers here are chosen so intensity 0.6 (the
+     default) reproduces the values this look shipped with originally. */
+  --glass-intensity: 0.6;
+  --glass-tint-rgb: 255, 255, 255;
+  --glass-bg: rgba(var(--glass-tint-rgb), calc(0.02 + 0.10 * var(--glass-intensity)));
+  --glass-bg-strong: rgba(var(--glass-tint-rgb), calc(0.05 + 0.15 * var(--glass-intensity)));
+  --glass-border: rgba(var(--glass-tint-rgb), calc(0.06 + 0.14 * var(--glass-intensity)));
+  --glass-highlight: rgba(255, 255, 255, calc(0.25 + 0.35 * var(--glass-intensity)));
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, calc(0.15 + 0.2 * var(--glass-intensity)));
+  --glass-blur: calc(6px + 26px * var(--glass-intensity));
 }
 
 :root[data-theme="light"] {
@@ -49,12 +58,14 @@
 
   /* Light mode sits on a white backdrop, so a light-tinted glass would be
      invisible — tint dark instead, at low opacity, with a bright top edge
-     still standing in for the specular highlight. */
-  --glass-bg: rgba(20, 20, 30, 0.05);
-  --glass-bg-strong: rgba(20, 20, 30, 0.08);
-  --glass-border: rgba(20, 20, 30, 0.1);
-  --glass-highlight: rgba(255, 255, 255, 0.8);
-  --glass-shadow: 0 8px 32px rgba(20, 20, 30, 0.1);
+     still standing in for the specular highlight. Same --glass-intensity
+     knob, re-scaled for how much subtler a dark tint reads on white. */
+  --glass-tint-rgb: 20, 20, 30;
+  --glass-bg: rgba(var(--glass-tint-rgb), calc(0.02 + 0.06 * var(--glass-intensity)));
+  --glass-bg-strong: rgba(var(--glass-tint-rgb), calc(0.03 + 0.08 * var(--glass-intensity)));
+  --glass-border: rgba(var(--glass-tint-rgb), calc(0.04 + 0.1 * var(--glass-intensity)));
+  --glass-highlight: rgba(255, 255, 255, calc(0.45 + 0.35 * var(--glass-intensity)));
+  --glass-shadow: 0 8px 32px rgba(20, 20, 30, calc(0.04 + 0.09 * var(--glass-intensity)));
 }
 
 * { box-sizing: border-box; }
@@ -277,6 +288,16 @@ img { max-width: 100%; display: block; }
   /* viewport-fit=cover lets the page paint under the status bar and home
      indicator, so pull the contents back inside the safe area. */
   padding-top: env(safe-area-inset-top, 0px);
+  /* Kept lightly glassy even before .scrolled kicks in — fully transparent
+     here let the hero's own giant title (vertically centered, so it slides
+     directly under the header while scrolling through the hero) show
+     straight through and collide with the header's own logo text. A half-
+     strength version of the same glass keeps the logo legible the whole
+     way, and still leaves room for .scrolled's stronger version to read as
+     a real transition once the hero clears. */
+  background: var(--glass-bg);
+  backdrop-filter: blur(calc(var(--glass-blur) * 0.5)) saturate(160%);
+  -webkit-backdrop-filter: blur(calc(var(--glass-blur) * 0.5)) saturate(160%);
   border-bottom: 1px solid transparent;
   transition: background 0.25s ease, border-color 0.25s ease, backdrop-filter 0.25s ease, box-shadow 0.25s ease;
 }
@@ -606,8 +627,8 @@ section:not(.hero) { padding: 110px 0; position: relative; z-index: 1; }
 .mix-card {
   scroll-margin-top: 96px;
   background: var(--glass-bg-strong);
-  backdrop-filter: blur(16px) saturate(160%);
-  -webkit-backdrop-filter: blur(16px) saturate(160%);
+  backdrop-filter: blur(calc(var(--glass-blur) * 0.7)) saturate(160%);
+  -webkit-backdrop-filter: blur(calc(var(--glass-blur) * 0.7)) saturate(160%);
   border: 1px solid var(--glass-border);
   border-radius: var(--radius);
   padding: 22px;
@@ -716,8 +737,8 @@ section:not(.hero) { padding: 110px 0; position: relative; z-index: 1; }
   align-items: center;
   gap: 24px;
   background: var(--glass-bg-strong);
-  backdrop-filter: blur(16px) saturate(160%);
-  -webkit-backdrop-filter: blur(16px) saturate(160%);
+  backdrop-filter: blur(calc(var(--glass-blur) * 0.7)) saturate(160%);
+  -webkit-backdrop-filter: blur(calc(var(--glass-blur) * 0.7)) saturate(160%);
   border: 1px solid var(--glass-border);
   border-radius: var(--radius);
   padding: 20px 24px;
@@ -766,8 +787,8 @@ section:not(.hero) { padding: 110px 0; position: relative; z-index: 1; }
 
 .merch-card {
   background: var(--glass-bg-strong);
-  backdrop-filter: blur(16px) saturate(160%);
-  -webkit-backdrop-filter: blur(16px) saturate(160%);
+  backdrop-filter: blur(calc(var(--glass-blur) * 0.7)) saturate(160%);
+  -webkit-backdrop-filter: blur(calc(var(--glass-blur) * 0.7)) saturate(160%);
   border: 1px solid var(--glass-border);
   border-radius: var(--radius);
   padding: 20px;
