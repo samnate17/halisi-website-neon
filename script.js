@@ -346,6 +346,9 @@ function renderContent(data) {
   if (data.design?.iconColor) root.setProperty('--icon-color', data.design.iconColor);
   else root.removeProperty('--icon-color');
   root.setProperty('--icon-contrast', data.design?.iconContrast != null ? Number(data.design.iconContrast) : 0);
+  // Drives the header/buttons/cards' "Liquid Glass" look — see the
+  // --glass-* calc() formulas in styles.css, all keyed off this one value.
+  root.setProperty('--glass-intensity', data.design?.glassIntensity != null ? Number(data.design.glassIntensity) : 0.6);
 
   const heroVideoSource = document.getElementById('heroVideoSource');
   const heroVideo = document.getElementById('heroVideo');
