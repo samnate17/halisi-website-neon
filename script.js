@@ -254,8 +254,18 @@ function uniqueSlugId(prefix, title, usedIds) {
   usedIds.add(id);
   return id;
 }
+// Points at a static per-item page (written by the admin panel on publish)
+// instead of straight at this page's own URL. Link-preview crawlers
+// (iMessage, WhatsApp, etc.) fetch a shared URL's raw HTML on the server —
+// they never run this script and never see a #hash — so a link straight to
+// index.html always showed the one fixed og:image/og:title on the page (the
+// homepage photo) no matter which mix or event was actually shared. The
+// generated page under /share/<id>.html carries its own og:image/og:title
+// for that specific mix/event, then immediately redirects a human visitor
+// through to the real card here.
 function shareIconButton(id, title) {
-  const url = `${location.origin}${location.pathname}#${id}`;
+  const base = location.pathname.replace(/[^/]*$/, '');
+  const url = `${location.origin}${base}share/${id}.html`;
   return `<button type="button" class="icon-share-btn" data-share-url="${escapeHtml(url)}" data-share-title="${escapeHtml(title)}" aria-label="Share ${escapeHtml(title)}">${SHARE_ICON}</button>`;
 }
 
