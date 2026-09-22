@@ -1021,9 +1021,15 @@ input:focus, select:focus, textarea:focus {
     flex-direction: column;
     align-items: flex-start;
     gap: 0;
-    background: var(--glass-bg-strong);
-    backdrop-filter: blur(var(--glass-blur)) saturate(180%);
-    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(180%);
+    /* This is a menu you have to actually read, not a decorative surface —
+       unlike the header/buttons/cards, it doesn't scale with the admin's
+       --glass-intensity slider. It uses the theme's own background color at
+       high opacity (still blurred, so it reads as the same glass material)
+       so the nav links stay legible over a busy hero video no matter how
+       thin the rest of the site's glass is set. */
+    background: rgba(var(--bg-rgb), 0.88);
+    backdrop-filter: blur(34px) saturate(180%);
+    -webkit-backdrop-filter: blur(34px) saturate(180%);
     /* max-height:0 clips the menu's contents but not its border, so this
        border kept painting a second line a few pixels under the header while
        the menu was closed. Draw it only when the menu is open. */
