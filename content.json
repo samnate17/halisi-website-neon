@@ -65,11 +65,13 @@
     {
       "imagePosition": "50% 50%",
       "imageZoom": "1",
-      "date": "",
+      "date": "2026-10-31",
       "title": "Maji Mazuri Amapiano After dark",
       "venue": "Naco taco ",
       "ticketUrl": "https://posh.vip/e/maji-mazuri-halloween-edition",
-      "imageUrl": "https://samnate17.github.io/halisi-website/uploads/1791777193074-img-2266.jpg"
+      "imageUrl": "https://samnate17.github.io/halisi-website/uploads/1791777193074-img-2266.jpg",
+      "day": "31",
+      "month": "Oct"
     }
   ],
   "merch": [],
