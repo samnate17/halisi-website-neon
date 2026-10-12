@@ -6,7 +6,7 @@
     "accentColor2": "#22e5ff",
     "heroTextColor": "#ffffff",
     "heroFont": "",
-    "heroContrast": 0,
+    "heroContrast": 1.15,
     "iconColor": "#8ec7d2",
     "iconContrast": 1,
     "glassIntensity": 0.6
