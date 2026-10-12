@@ -8,7 +8,8 @@
     "heroFont": "",
     "heroContrast": 1.5,
     "iconColor": "#8ec7d2",
-    "iconContrast": 1
+    "iconContrast": 1,
+    "glassIntensity": 0.6
   },
   "media": {
     "logoUrl": "https://samnate17.github.io/halisi-website/uploads/1787853747237-halisi-dj-logo.jpeg",
@@ -64,12 +65,12 @@
     {
       "imagePosition": "50% 50%",
       "imageZoom": "1",
-      "date": "2026-10-01",
-      "title": "Maji Mazuri",
-      "venue": "Middlesex Lounge, Cambridge ",
-      "ticketUrl": "https://posh.vip/e/maji-mazuri-at-middlesex-lounge",
-      "imageUrl": "https://samnate17.github.io/halisi-website/uploads/1789758101584-img-2126.jpeg",
-      "day": "1",
+      "date": "2026-10-31",
+      "title": "Maji Mazuri Halloween Edition",
+      "venue": "Naco Taco",
+      "ticketUrl": "https://posh.vip/e/maji-mazuri-halloween-edition",
+      "imageUrl": "",
+      "day": "31",
       "month": "Oct"
     }
   ],
@@ -170,6 +171,9 @@
     },
     {
       "date": "2026-10-18"
+    },
+    {
+      "date": "2026-10-31"
     }
   ],
   "booking": {
