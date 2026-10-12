@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Connecting…</title>
+<style>body{font-family:system-ui,sans-serif;background:#0a0a12;color:#fff;display:grid;place-items:center;min-height:100vh;margin:0}</style>
+</head>
+<body>
+<p>Returning to the Halisi app… you can close this tab.</p>
+<script>
+// Passes the sign-in result straight on to the desktop app. Nothing is
+// stored or sent anywhere else from here.
+location.replace('halisi://oauth' + location.search);
+</script>
+</body>
+</html>
