@@ -290,12 +290,11 @@ img { max-width: 100%; display: block; }
   padding-top: env(safe-area-inset-top, 0px);
   /* Flat, no glass. A soft solid scrim keeps the logo legible while the
      hero's own title slides under the header. */
-  background: rgba(var(--bg-rgb), 0.55);
+  background: rgba(var(--bg-rgb), var(--header-opacity, 0.55));
   border-bottom: 1px solid transparent;
   transition: background 0.25s ease, border-color 0.25s ease;
 }
 .site-header.scrolled {
-  background: var(--bg);
   border-bottom-color: rgba(128, 128, 128, 0.18);
 }
 
