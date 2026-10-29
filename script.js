@@ -722,3 +722,32 @@ if ('IntersectionObserver' in window && revealEls.length) {
 } else {
   revealEls.forEach((el) => el.classList.add('in-view'));
 }
+
+// Blog: the admin publishes blog/index.json along with the first post. Until
+// then the Blog link and the "From the blog" strip stay hidden, so the site
+// never advertises an empty page.
+(async function loadBlogTeasers() {
+  try {
+    const res = await fetch('blog/index.json', { cache: 'no-cache' });
+    if (!res.ok) return;
+    const posts = ((await res.json()).posts || []).filter((p) => p && p.slug && p.title);
+    if (!posts.length) return;
+    const nav = document.getElementById('navBlog');
+    if (nav) nav.hidden = false;
+    const section = document.getElementById('blogLatest');
+    const grid = document.getElementById('blogLatestGrid');
+    if (!section || !grid) return;
+    grid.innerHTML = posts.slice(0, 3).map((p) => {
+      const when = p.date ? new Date(`${p.date}T00:00:00`).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }) : '';
+      return `<a class="blog-card" href="blog/${encodeURIComponent(p.slug)}/">
+        ${p.cover ? `<img src="${escapeHtml(p.cover)}" alt="" loading="lazy">` : ''}
+        <div class="blog-card-body">
+          ${when ? `<p class="blog-date">${escapeHtml(when)}</p>` : ''}
+          <h3>${escapeHtml(p.title)}</h3>
+          ${p.excerpt ? `<p>${escapeHtml(p.excerpt)}</p>` : ''}
+        </div>
+      </a>`;
+    }).join('');
+    section.hidden = false;
+  } catch (e) { /* no blog yet */ }
+})();

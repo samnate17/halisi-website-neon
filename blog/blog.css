@@ -1,0 +1,46 @@
+/* Blog pages (index + posts). Built on the site's own tokens in /styles.css so
+   they follow the same theme, fonts and glass look. */
+body.blog { padding-top: 92px; }
+.blog-main { max-width: 760px; margin: 0 auto; padding: 36px 20px 90px; position: relative; z-index: 1; }
+.blog-main.wide { max-width: var(--max-w); }
+.blog-back { display: inline-block; margin-bottom: 22px; color: var(--text-dim); text-decoration: none; font-size: 0.9rem; }
+.blog-back:hover { color: var(--accent-2); }
+.blog-label { color: var(--accent); font-size: 0.8rem; letter-spacing: 0.14em; text-transform: uppercase; margin: 0 0 12px; }
+.post-head h1 { font-family: var(--font-heading); font-size: clamp(2rem, 5.2vw, 3.3rem); line-height: 1.08; margin: 0 0 14px; letter-spacing: -0.02em; }
+.post-meta { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; color: var(--text-dim); font-size: 0.92rem; margin: 0 0 6px; }
+.post-tags { display: flex; gap: 8px; flex-wrap: wrap; margin: 12px 0 0; }
+.post-tags span { font-size: 0.78rem; padding: 4px 11px; border-radius: 999px; border: 1px solid var(--glass-border); background: var(--glass-bg); color: var(--text-dim); }
+.post-cover { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: var(--radius); margin: 26px 0 8px; display: block; }
+.post-body { font-size: 1.12rem; line-height: 1.8; margin-top: 28px; overflow-wrap: anywhere; }
+.post-body > :first-child { margin-top: 0; }
+.post-body h2, .post-body h3, .post-body h4, .post-body h5 { font-family: var(--font-heading); line-height: 1.2; margin: 2.1em 0 0.6em; letter-spacing: -0.01em; }
+.post-body h2 { font-size: 1.9rem; }
+.post-body h3 { font-size: 1.5rem; }
+.post-body h4 { font-size: 1.25rem; }
+.post-body p { margin: 0 0 1.25em; }
+.post-body a { color: var(--accent-2); text-decoration: underline; text-underline-offset: 3px; }
+.post-body a:hover { color: var(--accent); }
+.post-body ul, .post-body ol { margin: 0 0 1.25em; padding-left: 1.4em; }
+.post-body li { margin: 0.35em 0; }
+.post-body blockquote { margin: 1.6em 0; padding: 4px 0 4px 20px; border-left: 3px solid var(--accent); color: var(--text-dim); font-size: 1.15rem; }
+.post-body blockquote p { margin: 0.4em 0; }
+.post-body hr { border: 0; border-top: 1px solid var(--border); margin: 2.4em 0; }
+.post-body code { background: var(--surface-2); padding: 2px 6px; border-radius: 6px; font-size: 0.92em; }
+.post-body pre { background: var(--surface-2); padding: 16px 18px; border-radius: 12px; overflow-x: auto; margin: 0 0 1.4em; }
+.post-body pre code { background: none; padding: 0; }
+.post-body figure { margin: 1.8em 0; }
+.post-body figure img, .post-body p > img { width: 100%; height: auto; border-radius: var(--radius); display: block; }
+.post-body figcaption { text-align: center; color: var(--text-dim); font-size: 0.88rem; margin-top: 8px; }
+.post-embed { margin: 1.8em 0; border-radius: var(--radius); overflow: hidden; }
+.post-embed iframe { width: 100%; border: 0; display: block; }
+.post-embed.video iframe { aspect-ratio: 16 / 9; height: auto; }
+.post-embed.audio iframe { height: 166px; }
+.post-embed.mix iframe { height: 120px; }
+.post-foot { margin-top: 48px; padding-top: 26px; border-top: 1px solid var(--border); display: flex; gap: 12px; flex-wrap: wrap; align-items: center; justify-content: space-between; }
+.blog-empty { color: var(--text-dim); }
+.blog-footer { position: relative; z-index: 1; text-align: center; color: var(--text-dim); font-size: 0.85rem; padding: 30px 20px 50px; border-top: 1px solid var(--border); }
+.blog-footer a { color: var(--text-dim); }
+.blog-footer a:hover { color: var(--accent-2); }
+.nav-links a.active { color: var(--text); }
+/* The homepage fades its header in with a scroll script; blog pages keep it solid. */
+body.blog .site-header { background: var(--bg); border-bottom: 1px solid var(--border); }
