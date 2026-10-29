@@ -340,7 +340,31 @@ function applyHomepageAudio(media) {
   toggle.hidden = false;
 }
 
+// Which sections of the site are shown (set in the admin under Content →
+// Website sections). Hiding one removes the section and every link to it, so
+// there is never an empty tab. A missing setting means shown.
+const SECTION_KEYS = ['bio', 'mixes', 'events', 'merch', 'booking'];
+let sectionsConfig = {};
+let blogHasPosts = false;
+const sectionOn = (key) => sectionsConfig[key] !== false;
+function applySections(cfg) {
+  if (cfg && typeof cfg === 'object') sectionsConfig = cfg;
+  SECTION_KEYS.forEach((key) => {
+    const on = sectionOn(key);
+    const section = document.getElementById(key);
+    if (section) section.hidden = !on;
+    document.querySelectorAll(`a[href="#${key}"]`).forEach((a) => { (a.closest('li') || a).hidden = !on; });
+  });
+  // The blog also needs at least one published post.
+  const showBlog = sectionOn('blog') && blogHasPosts;
+  const navBlog = document.getElementById('navBlog');
+  if (navBlog) navBlog.hidden = !showBlog;
+  const strip = document.getElementById('blogLatest');
+  if (strip) strip.hidden = !showBlog;
+}
+
 function renderContent(data) {
+  applySections(data.sections);
   applySiteBackground(data.media || {});
   applyHomepageAudio(data.media || {});
   const root = document.documentElement.style;
@@ -732,11 +756,9 @@ if ('IntersectionObserver' in window && revealEls.length) {
     if (!res.ok) return;
     const posts = ((await res.json()).posts || []).filter((p) => p && p.slug && p.title);
     if (!posts.length) return;
-    const nav = document.getElementById('navBlog');
-    if (nav) nav.hidden = false;
-    const section = document.getElementById('blogLatest');
+    blogHasPosts = true;
     const grid = document.getElementById('blogLatestGrid');
-    if (!section || !grid) return;
+    if (!grid) return;
     grid.innerHTML = posts.slice(0, 3).map((p) => {
       const when = p.date ? new Date(`${p.date}T00:00:00`).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }) : '';
       return `<a class="blog-card" href="blog/${encodeURIComponent(p.slug)}/">
@@ -748,6 +770,6 @@ if ('IntersectionObserver' in window && revealEls.length) {
         </div>
       </a>`;
     }).join('');
-    section.hidden = false;
+    applySections();
   } catch (e) { /* no blog yet */ }
 })();
