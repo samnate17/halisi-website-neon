@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>Halisi DJ blog</title>
+    <link>https://halisidj.com/blog/</link>
+    <description>Notes from Halisi DJ: new mixes, shows and Afrobeats, Amapiano and Afrohouse on rotation.</description>
+    <language>en</language>
+    <item>
+      <title>Amapiano</title>
+      <link>https://halisidj.com/blog/amapiano/</link>
+      <guid isPermaLink="true">https://halisidj.com/blog/amapiano/</guid>
+      <pubDate>Sat, 31 Oct 2026 12:00:00 GMT</pubDate>
+      <description>The Halisi Weekly: Halloween Night 🎃 News, recaps, and good vibes from behind the decks. Welcome to the very first post of The Halisi Weekly. I’m DJ…</description>
+    </item>
+  </channel>
+</rss>
