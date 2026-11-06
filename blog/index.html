@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0a0a12">
+<title>Blog — Halisi DJ</title>
+<meta name="description" content="Weekly notes from Halisi DJ: new mixes, shows, and what is on rotation in Afrobeats, Amapiano and Afrohouse.">
+<link rel="canonical" href="https://halisidj.com/blog/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Halisi DJ">
+<meta property="og:title" content="Blog — Halisi DJ">
+<meta property="og:description" content="Weekly notes from Halisi DJ: new mixes, shows, and what is on rotation in Afrobeats, Amapiano and Afrohouse.">
+<meta property="og:image" content="https://samnate17.github.io/halisi-website/uploads/1787853747237-halisi-dj-logo.jpeg">
+<meta property="og:url" content="https://halisidj.com/blog/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Blog — Halisi DJ">
+<meta name="twitter:description" content="Weekly notes from Halisi DJ: new mixes, shows, and what is on rotation in Afrobeats, Amapiano and Afrohouse.">
+<meta name="twitter:image" content="https://samnate17.github.io/halisi-website/uploads/1787853747237-halisi-dj-logo.jpeg">
+<link rel="alternate" type="application/rss+xml" title="Halisi DJ blog" href="https://halisidj.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Blog","name":"Halisi DJ blog","url":"https://halisidj.com/blog/","blogPost":[{"@type":"BlogPosting","headline":"Amapiano","url":"https://halisidj.com/blog/amapiano/","datePublished":"2026-10-31"}]}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
+<link rel="stylesheet" href="/blog/blog.css">
+<script>
+(function () {
+  try {
+    var saved = localStorage.getItem('halisi-theme');
+    var theme = saved || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+    document.documentElement.setAttribute('data-theme', theme);
+  } catch (e) {}
+})();
+</script>
+</head>
+<body class="blog">
+<header class="site-header" id="top">
+  <nav class="nav container">
+    <a class="logo" href="/"><img class="logo-img visible" src="https://samnate17.github.io/halisi-website/uploads/1787853747237-halisi-dj-logo.jpeg" alt="Halisi"><span class="logo-text hidden">Halisi</span></a>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    <ul class="nav-links" id="navLinks">
+      <li data-section="bio"><a href="/#bio">Bio</a></li>
+      <li data-section="mixes"><a href="/#mixes">Mixes</a></li>
+      <li data-section="events"><a href="/#events">Events</a></li>
+      <li data-section="blog"><a href="/blog/" class="active">Blog</a></li>
+      <li data-section="booking"><a href="/#booking" class="nav-cta">Booking</a></li>
+    </ul>
+  </nav>
+</header>
+<main class="blog-main wide">
+<p class="blog-label">Journal</p>
+<h1 class="section-title" style="margin-bottom:28px;">Blog</h1>
+<div class="blog-grid">
+    <a class="blog-card" href="/blog/amapiano/">
+      
+      <div class="blog-card-body">
+        <p class="blog-date">October 31, 2026</p>
+        <h3>Amapiano</h3>
+        <p>The Halisi Weekly: Halloween Night 🎃 News, recaps, and good vibes from behind the decks. Welcome to the very first post of The Halisi Weekly. I’m DJ…</p>
+      </div>
+    </a>
+</div>
+</main>
+<footer class="blog-footer"><p>&copy; 2026 Halisi DJ &middot; <a href="/">Home</a> &middot; <a href="/blog/">Blog</a> &middot; <a href="/feed.xml">RSS</a></p></footer>
+<script>
+document.getElementById('navToggle').addEventListener('click', function () {
+  var open = document.getElementById('navLinks').classList.toggle('open');
+  this.setAttribute('aria-expanded', String(open));
+});
+// Follow the "Website sections" switches from the admin.
+fetch('/content.json', { cache: 'no-cache' }).then(function (r) { return r.json(); }).then(function (d) {
+  var s = d.sections || {};
+  document.querySelectorAll('[data-section]').forEach(function (li) { if (s[li.dataset.section] === false) li.hidden = true; });
+}).catch(function () {});
+</script>
+</body>
+</html>
